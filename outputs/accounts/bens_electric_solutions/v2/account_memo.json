@@ -1,0 +1,97 @@
+{
+  "account_id": "bens_electric_solutions",
+  "company_name": "Ben's Electric Solutions",
+  "business_hours": {
+    "regular": {
+      "days": "Monday-Friday",
+      "start": "7:00 AM",
+      "end": "5:30 PM"
+    },
+    "saturday": {
+      "start": "7:00 AM",
+      "end": "5:30 PM",
+      "note": "emergency callbacks"
+    },
+    "sunday": {
+      "note": "Closed"
+    },
+    "timezone": "Eastern",
+    "seasonal_adjustments": [],
+    "holidays": []
+  },
+  "office_address": "4521 West Kennedy Boulevard, Tampa, FL 33609",
+  "services_supported": [
+    "ac",
+    "electrical work",
+    "lighting",
+    "panel upgrade",
+    "rewiring",
+    "wiring"
+  ],
+  "emergency_definition": [
+    "Exposed live wiring",
+    "Sparking panels",
+    "Complete power loss at a commercial property",
+    "Any situation where there's a fire risk from electrical issues",
+    "Complete power loss at commercial properties",
+    "I want to add one more: any electrical issue at a healthcare facility regardless of the specific problem",
+    "If a hospital or medical office calls with any electrical issue",
+    "Healthcare gets automatic emergency priority"
+  ],
+  "emergency_routing_rules": {
+    "chain": [
+      {
+        "role": "Backup Technician",
+        "phone": "813-555-0142",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Backup Technician",
+        "phone": "813-555-0198",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Backup Technician",
+        "phone": "813-555-0101",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Contact",
+        "phone": "813-555-0100",
+        "timeout_seconds": 30
+      }
+    ]
+  },
+  "non_emergency_routing_rules": {
+    "callback_timeframe": "within 1 hour",
+    "office_number": "813-555-0100"
+  },
+  "call_transfer_rules": {
+    "office_timeout_seconds": 30
+  },
+  "integration_constraints": [
+    "For non-emergency stuff, Clara can create the service request in ServiceTrade. But for emergency calls, don't create anything — just route the call and let the technician handle the paperwork after. Oh and one more thing — we do NOT do generator installations. If someone calls about generators, just let them know we don't offer that service and recommend they call someone else.",
+    "Here's the updated rule: Clara can create service requests in ServiceTrade for panel upgrades, lighting installations, and general maintenance requests. Do NOT create tickets for emergency calls — those just get routed. And do NOT create tickets for anything involving permits or inspections — those need to go through our permitting team first. Oh, and we still don't do generators — politely decline those."
+  ],
+  "after_hours_flow_summary": "After hours: Greet caller, note office is closed, determine purpose, check if emergency. If emergency: collect name, number, address, attempt routing via escalation chain. If non-emergency: collect details, confirm next-business-day callback.",
+  "office_hours_flow_summary": "Business hours: Greet caller, determine purpose, check if emergency. If emergency: collect critical info and route immediately. If routine: collect name and number, transfer to office. If transfer fails: take message, confirm callback timeframe.",
+  "excluded_services": [
+    "generator installations",
+    "that service and recommend they call someone else",
+    "generators — politely decline those"
+  ],
+  "custom_greeting": "Thank you for calling Ben",
+  "non_emergency_collection_fields": [
+    "name and callback number",
+    "information for?",
+    "they need",
+    "name"
+  ],
+  "questions_or_unknowns": [],
+  "notes": "Updated from onboarding call. Confirmed operational details override demo assumptions.",
+  "_metadata": {
+    "version": "v2",
+    "created_at": "2026-03-04T10:50:36.624523Z",
+    "account_id": "bens_electric_solutions"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "account_id": "guardian_alarm_systems",
+  "company_name": "Guardian Alarm Systems",
+  "business_hours": {
+    "regular": {
+      "days": "Monday-Friday",
+      "start": "8:30 AM",
+      "end": "5:30 PM"
+    },
+    "saturday": {},
+    "sunday": {},
+    "timezone": "Eastern",
+    "seasonal_adjustments": [],
+    "holidays": [
+      "Monday through Friday, 8:30 AM to 5:30 PM Eastern. Closed weekends and federal holidays."
+    ]
+  },
+  "office_address": "",
+  "services_supported": [
+    "cctv",
+    "alarm system",
+    "access control",
+    "security",
+    "monitoring",
+    "ac"
+  ],
+  "emergency_definition": [
+    "So there's a gap between true alarm emergencies that your monitoring station handles",
+    "An emergency for us on the service side would be: access control system completely down",
+    "Alarm panel offline or in communication failure",
+    "A client reporting they think their system was tampered with"
+  ],
+  "emergency_routing_rules": {
+    "chain": [
+      {
+        "role": "Field Supervisor",
+        "phone": "404-555-0450",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Field Supervisor",
+        "phone": "404-555-0460",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Field Supervisor",
+        "phone": "404-555-0475",
+        "timeout_seconds": 60
+      }
+    ]
+  },
+  "non_emergency_routing_rules": {},
+  "call_transfer_rules": {},
+  "integration_constraints": [],
+  "after_hours_flow_summary": "After hours: Greet caller, note office is closed, determine purpose, check if emergency. If emergency: collect name, number, address, attempt routing via escalation chain. If non-emergency: collect details, confirm next-business-day callback.",
+  "office_hours_flow_summary": "Business hours: Greet caller, determine purpose, check if emergency. If emergency: collect critical info and route immediately. If routine: collect name and number, transfer to office. If transfer fails: take message, confirm callback timeframe.",
+  "excluded_services": [],
+  "custom_greeting": null,
+  "non_emergency_collection_fields": [
+    "company name and check against a client list"
+  ],
+  "questions_or_unknowns": [
+    "Office address not provided"
+  ],
+  "notes": "Extracted from demo call — details may be preliminary and subject to change during onboarding. 1 items need clarification.",
+  "_metadata": {
+    "version": "v1",
+    "created_at": "2026-03-04T10:50:36.590629Z",
+    "account_id": "guardian_alarm_systems"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "name": "Pipeline A - Demo Call to Agent v1",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "pipeline-a",
+        "httpMethod": "POST",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "pipeline-a-trigger"
+    },
+    {
+      "parameters": {
+        "operation": "readFile",
+        "fileName": "={{ $json.body.transcript_path }}",
+        "options": {}
+      },
+      "id": "read-transcript",
+      "name": "Read Transcript File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "command": "python /data/scripts/parse_transcript.py --file \"{{ $json.body.transcript_path }}\""
+      },
+      "id": "parse-transcript",
+      "name": "Parse Transcript",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [690, 300],
+      "notesInFlow": true,
+      "notes": "Normalizes transcript, detects call type, extracts company name"
+    },
+    {
+      "parameters": {
+        "command": "cd /data && python -c \"\nimport sys, json\nsys.path.insert(0, '/data')\nfrom scripts.parse_transcript import parse_transcript\nfrom scripts.extract_memo import extract_account_memo\nfrom scripts.generate_agent_spec import generate_agent_spec\nfrom scripts.utils.storage import save_account_memo, save_agent_spec\n\ntranscript = parse_transcript('{{ $json.body.transcript_path }}')\nmemo = extract_account_memo(transcript)\naccount_id = transcript['account_id']\n\nmemo_path = save_account_memo(account_id, memo, 'v1')\nspec = generate_agent_spec(memo, 'v1')\nspec_path = save_agent_spec(account_id, spec, 'v1')\n\nprint(json.dumps({\n    'account_id': account_id,\n    'company_name': transcript['company_name'],\n    'memo_path': memo_path,\n    'spec_path': spec_path,\n    'status': 'success'\n}))\n\""
+      },
+      "id": "extract-and-generate",
+      "name": "Extract Memo & Generate Agent Spec",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [910, 300],
+      "notesInFlow": true,
+      "notes": "Extracts account memo from transcript and generates Retell agent spec v1"
+    },
+    {
+      "parameters": {
+        "functionCode": "const output = JSON.parse($input.item.json.stdout);\nreturn [{\n  json: {\n    account_id: output.account_id,\n    company_name: output.company_name,\n    memo_path: output.memo_path,\n    spec_path: output.spec_path,\n    status: output.status,\n    pipeline: 'A',\n    version: 'v1',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "format-output",
+      "name": "Format Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1350, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Transcript File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Transcript File": {
+      "main": [
+        [
+          {
+            "node": "Parse Transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Transcript": {
+      "main": [
+        [
+          {
+            "node": "Extract Memo & Generate Agent Spec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Memo & Generate Agent Spec": {
+      "main": [
+        [
+          {
+            "node": "Format Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Output": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "pipeline-a-demo-to-agent-v1",
+  "meta": {
+    "instanceId": "local-clara-automation"
+  },
+  "tags": [
+    {
+      "name": "clara-automation",
+      "id": "1"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+Clara Onboarding Call - Comfort Zone HVAC
+Date: 2024-12-08
+Participants: Sam (Clara Onboarding), David Park (Owner, Comfort Zone HVAC)
+
+[00:00:10] Sam: David, welcome! Let's get Clara dialed in for Comfort Zone HVAC. I'll go through everything from the demo and we'll finalize the details.
+
+[00:00:20] David: Let's do it.
+
+[00:00:23] Sam: Business hours — Monday through Friday 8 AM to 6 PM Mountain Time. Closed weekends. Correct?
+
+[00:00:30] David: Mostly. I want to add that during peak summer months, June through August, we extend to 7 PM on weekdays because that's our busiest season for AC work. Also we now have a Saturday morning crew, 9 AM to 1 PM Mountain, for maintenance contract appointments only.
+
+[00:00:55] Sam: Seasonal extension and Saturday mornings, noted. Emergency definitions — you had heating failure below 32°F, gas leak or smell from HVAC, CO detector triggered from furnace, and AC failure in commercial buildings with servers or medical equipment. Changes?
+
+[00:01:15] David: Keep all those. Add one more: any HVAC failure in a building with elderly care or daycare facilities, regardless of temperature. Those are vulnerable populations and we need to respond immediately.
+
+[00:01:32] Sam: Good addition. Routing — on-call tech at 303-555-0200, then you at 303-555-0210. Two-tier with what timeout?
+
+[00:01:42] David: Let's do 40 seconds for the tech, then 60 seconds for me. And we actually added a third tier since the demo. If I don't answer, try my business partner Jake at 303-555-0225 for another 60 seconds. If nobody answers, tell the caller: "I've sent an urgent notification to our entire team. Someone will call you back within 20 minutes. If this involves a gas leak, please leave the building immediately and call 911."
+
+[00:02:15] Sam: Critical safety messaging for gas leaks — love it. During business hours, transfers?
+
+[00:02:22] David: Transfer to our office at 303-555-0190. If no answer in 25 seconds, take a message. For duct cleaning inquiries specifically, Clara should ask: square footage, how many vents, when was it last cleaned, and any allergies or indoor air quality concerns. Those details help us quote accurately.
+
+[00:02:48] Sam: That's very specific — great. ServiceTrade or job management?
+
+[00:02:53] David: We don't use ServiceTrade. We use Housecall Pro. For now, Clara shouldn't try to create any jobs in the system. Just collect info and we'll enter it manually. Maybe in phase two we'll integrate.
+
+[00:03:10] Sam: Fair enough. Non-emergency after-hours protocol?
+
+[00:03:15] David: Name, phone, address, description of the issue, what brand and age of their HVAC system if they know it, and whether they have a maintenance contract with us. If they do have a contract, mention that they get priority scheduling.
+
+[00:03:35] Sam: Custom greeting?
+
+[00:03:38] David: "Thanks for calling Comfort Zone HVAC, where your comfort is our priority. This is Clara, how can I help?"
+
+[00:03:48] Sam: Great tagline. Anything else?
+
+[00:03:50] David: Yeah — we don't do commercial refrigeration. If someone calls about walk-in coolers or freezers, we need to refer them out. We only do HVAC — heating, ventilation, and air conditioning.
+
+[00:04:05] Sam: Noted. I'll have everything configured shortly. Thanks David!

@@ -1,0 +1,39 @@
+Clara Demo Call - Comfort Zone HVAC
+Date: 2024-11-20
+Participants: Alex (Clara Sales), David Park (Owner, Comfort Zone HVAC)
+
+[00:00:12] Alex: David, thanks for joining. Tell me about Comfort Zone HVAC.
+
+[00:00:18] David: Hey Alex. We're Comfort Zone HVAC, we're in Denver, Colorado. Residential and light commercial HVAC — installations, repairs, maintenance contracts. We also do duct cleaning and indoor air quality stuff.
+
+[00:00:40] Alex: Nice. What's your call handling situation like now?
+
+[00:00:45] David: It's not great. I have two office staff during the day but after hours everything goes to a generic voicemail. Problem is, in Colorado when the heat goes out in January, that's an emergency. People are calling at 2 AM because their furnace died and it's minus ten outside. Those calls can't wait until morning.
+
+[00:01:15] Alex: Totally understand. So heating failures in extreme cold would be an emergency?
+
+[00:01:22] David: Yes. Our emergency definition is: complete heating failure when outside temp is below 32°F, gas leak or gas smell from HVAC equipment, carbon monoxide detector triggered related to furnace, or AC failure in a commercial building with servers or medical equipment. We don't treat residential AC failures as emergencies in summer — annoying yes, but not dangerous.
+
+[00:01:55] Alex: That's a really smart distinction. What are your hours?
+
+[00:02:00] David: Monday through Friday 8 AM to 6 PM Mountain Time. We're closed weekends except for emergencies.
+
+[00:02:12] Alex: And the after-hours routing?
+
+[00:02:16] David: Our emergency line is 303-555-0200. That goes to the on-call tech. If no answer in 30 seconds, call me at 303-555-0210. That's it, just two levels. We're a smaller operation.
+
+[00:02:35] Alex: Got it. Let me show you a demo of how Clara would handle this...
+
+[00:02:45] [Demo plays]
+
+[00:04:30] David: That sounds great. One thing — we get a LOT of calls about duct cleaning quotes. Can Clara handle those? Like give them basic pricing info?
+
+[00:04:42] Alex: Clara can collect their info and the details about what they need, and then either transfer to your office or let them know someone will call back with a quote. We typically don't have Clara quote prices since those can change.
+
+[00:04:58] David: OK that works. Just make sure Clara asks for the square footage of the property for duct cleaning calls because that's how we estimate.
+
+[00:05:10] Alex: Smart. I'll include that in the configuration. Our address?
+
+[00:05:15] David: 8900 East Colfax Avenue, Denver, CO 80220.
+
+[00:05:22] Alex: Perfect, I'll get a proposal together. Thanks David!

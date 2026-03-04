@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Python automation pipeline
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./tasks:/app/tasks
+      - ./scripts:/app/scripts
+    environment:
+      - PYTHONPATH=/app
+      - DATA_DIR=/app/data
+      - OUTPUT_DIR=/app/outputs
+    command: ["python", "scripts/run_pipeline.py", "--pipeline", "all"]
+
+  # n8n workflow automation (self-hosted, free)
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./data:/data/transcripts
+      - ./outputs:/data/outputs
+      - ./scripts:/data/scripts
+      - ./workflows:/data/workflows
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER:-admin}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD:-changeme}
+      - GENERIC_TIMEZONE=America/New_York
+      - N8N_SECURE_COOKIE=false
+    restart: unless-stopped
+
+volumes:
+  n8n_data:

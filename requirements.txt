@@ -1,0 +1,2 @@
+# Clara Automation Pipeline - Dependencies
+# All zero-cost, no paid services required

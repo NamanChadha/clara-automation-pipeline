@@ -1,0 +1,35 @@
+Clara Demo Call - Guardian Alarm Systems
+Date: 2024-11-22
+Participants: Jordan (Clara Sales), Steve Walsh (VP Operations, Guardian Alarm Systems)
+
+[00:00:08] Jordan: Steve, thanks for the time today. Tell me about Guardian Alarm Systems.
+
+[00:00:15] Steve: Sure. We're Guardian Alarm Systems out of Atlanta, Georgia. We do commercial security — alarm system installations, monitoring, access control, CCTV. We service a lot of warehouses, office buildings, and retail chains across the metro Atlanta area.
+
+[00:00:38] Jordan: That's a great market. What does call handling look like for you currently?
+
+[00:00:45] Steve: We have a central monitoring station that handles actual alarm events 24/7. But for everything else — service calls, new installations, questions about their systems — those go through our main office line. After hours, callers just get voicemail. The problem is some of those calls are semi-urgent. Like if a client's access control system goes down on a Friday night and they can't get into their building Monday morning — that needs attention before Monday.
+
+[00:01:20] Jordan: So there's a gap between true alarm emergencies that your monitoring station handles, and service-related urgencies?
+
+[00:01:28] Steve: Exactly. Clara would handle the service side. An emergency for us on the service side would be: access control system completely down, alarm panel offline or in communication failure, or a client reporting they think their system was tampered with. Those need immediate tech response.
+
+[00:01:55] Jordan: Clear. Hours?
+
+[00:01:58] Steve: Monday through Friday, 8:30 AM to 5:30 PM Eastern. Closed weekends and federal holidays.
+
+[00:02:08] Jordan: After-hours routing for service emergencies?
+
+[00:02:12] Steve: Service dispatch is at 404-555-0450. Then our field supervisor at 404-555-0460. Then me at 404-555-0475. Each one gets 60 seconds before it moves to the next.
+
+[00:02:35] Jordan: Three-tier with 60-second timeouts. Got it. Let me run the demo...
+
+[00:02:42] [Demo plays]
+
+[00:04:45] Steve: Yeah, that would help a lot. One thing — we have different procedures for different client tiers. Our platinum clients always get priority routing. Is that something Clara can handle?
+
+[00:05:00] Jordan: Potentially, yes. Clara could ask for the company name and check against a client list. We'd configure that during onboarding.
+
+[00:05:12] Steve: OK good. Let's move forward with a proposal. Our address is 3300 Peachtree Road NE, Suite 1200, Atlanta, GA 30326.
+
+[00:05:25] Jordan: Great, I'll have that ready. Thanks Steve!

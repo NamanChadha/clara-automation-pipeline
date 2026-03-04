@@ -1,0 +1,166 @@
+{
+    "name": "Pipeline B - Onboarding to Agent v2",
+    "nodes": [
+        {
+            "parameters": {
+                "path": "pipeline-b",
+                "httpMethod": "POST",
+                "responseMode": "lastNode",
+                "options": {}
+            },
+            "id": "webhook-trigger-b",
+            "name": "Webhook Trigger",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                250,
+                300
+            ],
+            "webhookId": "pipeline-b-trigger"
+        },
+        {
+            "parameters": {
+                "operation": "readFile",
+                "fileName": "={{ $json.body.transcript_path }}",
+                "options": {}
+            },
+            "id": "read-onboarding",
+            "name": "Read Onboarding Transcript",
+            "type": "n8n-nodes-base.readWriteFile",
+            "typeVersion": 1,
+            "position": [
+                470,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "command": "cd /data && python -c \"\nimport sys, json\nsys.path.insert(0, '/data')\nfrom scripts.parse_transcript import parse_transcript\nfrom scripts.extract_memo import extract_account_memo\nfrom scripts.utils.storage import load_account_memo\n\ntranscript = parse_transcript('{{ $json.body.transcript_path }}')\naccount_id = transcript['account_id']\n\nv1_memo = load_account_memo(account_id, 'v1')\nhas_v1 = v1_memo is not None\n\nprint(json.dumps({\n    'account_id': account_id,\n    'company_name': transcript['company_name'],\n    'has_v1': has_v1,\n    'transcript_path': '{{ $json.body.transcript_path }}'\n}))\n\""
+            },
+            "id": "load-v1",
+            "name": "Load v1 Memo & Validate",
+            "type": "n8n-nodes-base.executeCommand",
+            "typeVersion": 1,
+            "position": [
+                690,
+                300
+            ],
+            "notesInFlow": true,
+            "notes": "Loads existing v1 memo for this account. Fails gracefully if v1 doesn't exist."
+        },
+        {
+            "parameters": {
+                "command": "cd /data && python -c \"\nimport sys, json\nsys.path.insert(0, '/data')\nfrom scripts.parse_transcript import parse_transcript\nfrom scripts.update_from_onboarding import update_from_onboarding\nfrom scripts.generate_agent_spec import generate_agent_spec\nfrom scripts.generate_changelog import generate_changelog, generate_changes_json\nfrom scripts.utils.storage import (\n    load_account_memo, save_account_memo, save_agent_spec,\n    save_changelog, save_json, DEFAULT_OUTPUT_DIR\n)\nimport os\n\ntranscript_path = '{{ $json.body.transcript_path }}'\ntranscript = parse_transcript(transcript_path)\naccount_id = transcript['account_id']\ncompany = transcript['company_name']\n\nv1_memo = load_account_memo(account_id, 'v1')\nif not v1_memo:\n    print(json.dumps({'error': 'No v1 memo found', 'account_id': account_id}))\n    sys.exit(1)\n\nv2_memo, changes = update_from_onboarding(v1_memo, transcript)\nmemo_path = save_account_memo(account_id, v2_memo, 'v2')\n\nv2_spec = generate_agent_spec(v2_memo, 'v2')\nspec_path = save_agent_spec(account_id, v2_spec, 'v2')\n\nchangelog_md = generate_changelog(account_id, company, changes)\ncl_path = save_changelog(account_id, changelog_md)\n\nchanges_json = generate_changes_json(account_id, company, changes)\nchanges_path = os.path.join(DEFAULT_OUTPUT_DIR, 'accounts', account_id, 'changes.json')\nsave_json(changes_json, changes_path)\n\nprint(json.dumps({\n    'account_id': account_id,\n    'company_name': company,\n    'memo_path': memo_path,\n    'spec_path': spec_path,\n    'changelog_path': cl_path,\n    'total_changes': len(changes),\n    'status': 'success'\n}))\n\""
+            },
+            "id": "apply-onboarding",
+            "name": "Apply Onboarding Updates",
+            "type": "n8n-nodes-base.executeCommand",
+            "typeVersion": 1,
+            "position": [
+                910,
+                300
+            ],
+            "notesInFlow": true,
+            "notes": "Extracts onboarding data, computes diff, merges with v1, generates v2 + changelog"
+        },
+        {
+            "parameters": {
+                "functionCode": "const output = JSON.parse($input.item.json.stdout);\nreturn [{\n  json: {\n    account_id: output.account_id,\n    company_name: output.company_name,\n    memo_path: output.memo_path,\n    spec_path: output.spec_path,\n    changelog_path: output.changelog_path,\n    total_changes: output.total_changes,\n    status: output.status,\n    pipeline: 'B',\n    version: 'v2',\n    timestamp: new Date().toISOString()\n  }\n}];"
+            },
+            "id": "format-output-b",
+            "name": "Format Output",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 1,
+            "position": [
+                1130,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "={{ $json }}"
+            },
+            "id": "respond-b",
+            "name": "Respond to Webhook",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1,
+            "position": [
+                1350,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Read Onboarding Transcript",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Read Onboarding Transcript": {
+            "main": [
+                [
+                    {
+                        "node": "Load v1 Memo & Validate",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Load v1 Memo & Validate": {
+            "main": [
+                [
+                    {
+                        "node": "Apply Onboarding Updates",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Apply Onboarding Updates": {
+            "main": [
+                [
+                    {
+                        "node": "Format Output",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Format Output": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": false,
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "versionId": "1",
+    "id": "pipeline-b-onboarding-to-agent-v2",
+    "meta": {
+        "instanceId": "local-clara-automation"
+    },
+    "tags": [
+        {
+            "name": "clara-automation",
+            "id": "1"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+Clara Demo Call - AllStar Plumbing & Mechanical
+Date: 2024-11-25
+Participants: Alex (Clara Sales), Karen Torres (Office Manager, AllStar Plumbing & Mechanical)
+
+[00:00:10] Alex: Karen, thanks for joining. I'd love to hear about AllStar Plumbing and how we can help.
+
+[00:00:18] Karen: Hi Alex. So we're AllStar Plumbing and Mechanical, based in Phoenix, Arizona. We do commercial plumbing and mechanical work — think pipe repairs, water heater installations, backflow testing, grease trap maintenance. We service restaurants, hotels, and commercial buildings throughout the Valley.
+
+[00:00:45] Alex: Great niche. How's your call handling today?
+
+[00:00:50] Karen: Honestly it's a problem area. I'm the one answering phones and doing scheduling and billing and everything else. During the day I can barely keep up. After hours we have a really old answering service that just takes messages. But plumbing emergencies don't wait — a burst pipe in a restaurant kitchen at midnight means they're losing thousands of dollars an hour.
+
+[00:01:20] Alex: That's a perfect use case for Clara. What would you consider a plumbing emergency?
+
+[00:01:28] Karen: Active water leak or burst pipe, sewer backup or overflow, gas line damage or gas smell, no hot water in a hotel or healthcare facility, or a main water line break. Those all need immediate response.
+
+[00:01:50] Alex: And your hours?
+
+[00:01:53] Karen: We do Monday through Friday, 7 AM to 4 PM Arizona time. Arizona doesn't observe daylight saving by the way, so we're always Mountain Standard. We also work Saturdays 7 AM to noon.
+
+[00:02:12] Alex: Good to know about the timezone. After-hours emergency routing?
+
+[00:02:18] Karen: Our on-call tech is reached at 602-555-0500. If no answer, try our plumbing supervisor at 602-555-0515. Then the owner Rick at 602-555-0525. Give each one 45 seconds.
+
+[00:02:40] Alex: Perfect. Let me show you Clara in action...
+
+[00:02:48] [Demo plays]
+
+[00:04:50] Karen: That's exactly what we need. One important thing — for grease trap calls, we need to know the size of the trap and when it was last serviced. Clara should ask those questions for non-emergency grease trap scheduling.
+
+[00:05:10] Alex: Absolutely, we can add custom questions for specific service types. What about your job management system?
+
+[00:05:18] Karen: We use ServiceTrade. Clara can create service requests for non-emergency stuff — plumbing repairs, water heater quotes, backflow testing. But for emergency calls, just route them, don't create tickets.
+
+[00:05:38] Alex: Got it. Same pattern we see a lot — emergencies get routed, everything else gets documented. I'll put a proposal together.
+
+[00:05:48] Karen: Sounds good. We're at 2200 West Indian School Road, Phoenix, AZ 85015.
+
+[00:05:55] Alex: Thanks Karen, I'll be in touch!

@@ -1,0 +1,95 @@
+{
+  "account_id": "comfort_zone_hvac",
+  "company_name": "Comfort Zone HVAC",
+  "business_hours": {
+    "regular": {
+      "days": "Monday-Friday",
+      "start": "9:00 AM",
+      "end": "1:00 PM"
+    },
+    "saturday": {
+      "start": "9:00 AM",
+      "end": "1:00 PM",
+      "note": "maintenance contracts only"
+    },
+    "sunday": {},
+    "timezone": "Mountain",
+    "seasonal_adjustments": [
+      "Mostly. I want to add that during peak summer months, June through August, we extend to 7 PM on weekdays because that's our busiest season for AC work. Also we now have a Saturday morning crew, 9 AM to 1 PM Mountain, for maintenance contract appointments only.",
+      "Mostly. I want to add that during peak summer months, June through August, we extend to 7 PM on weekdays because that's our busiest season for AC work. Also we now have a Saturday morning crew, 9 AM to 1 PM Mountain, for maintenance contract appointments only."
+    ],
+    "holidays": []
+  },
+  "office_address": "8900 East Colfax Avenue, Denver, CO 80220",
+  "services_supported": [
+    "ac",
+    "air conditioning",
+    "duct",
+    "duct cleaning",
+    "furnace",
+    "heating",
+    "hvac",
+    "indoor air quality",
+    "ventilation"
+  ],
+  "emergency_definition": [
+    "Our emergency definition is: complete heating failure when outside temp is below 32°F",
+    "Gas leak or gas smell from HVAC equipment",
+    "Carbon monoxide detector triggered related to furnace",
+    "AC failure in a commercial building with servers or medical equipment",
+    "Emergency definitions — you had heating failure below 32°F",
+    "Gas leak or smell from HVAC",
+    "And AC failure in commercial buildings with servers or medical equipment",
+    "Add one more: any HVAC failure in a building with elderly care or daycare facilities"
+  ],
+  "emergency_routing_rules": {
+    "chain": [
+      {
+        "role": "On-call Technician",
+        "phone": "303-555-0200",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "On-call Technician",
+        "phone": "303-555-0210",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Business Partner",
+        "phone": "303-555-0225",
+        "timeout_seconds": 40
+      },
+      {
+        "role": "Contact",
+        "phone": "303-555-0190",
+        "timeout_seconds": 25
+      }
+    ],
+    "fallback_message": "I"
+  },
+  "non_emergency_routing_rules": {},
+  "call_transfer_rules": {
+    "office_timeout_seconds": 25,
+    "fallback_message": "I"
+  },
+  "integration_constraints": [
+    "We don't use ServiceTrade. We use Housecall Pro. For now, Clara shouldn't try to create any jobs in the system. Just collect info and we'll enter it manually. Maybe in phase two we'll integrate."
+  ],
+  "after_hours_flow_summary": "After hours: Greet caller, note office is closed, determine purpose, check if emergency. If emergency: collect name, number, address, attempt routing via escalation chain. If non-emergency: collect details, confirm next-business-day callback.",
+  "office_hours_flow_summary": "Business hours: Greet caller, determine purpose, check if emergency. If emergency: collect critical info and route immediately. If routine: collect name and number, transfer to office. If transfer fails: take message, confirm callback timeframe.",
+  "excluded_services": [
+    "commercial refrigeration"
+  ],
+  "custom_greeting": "Thanks for calling Comfort Zone HVAC, where your comfort is our priority. This is Clara, how can I help?",
+  "non_emergency_collection_fields": [
+    "info and the details about what they need",
+    "info and we'll enter it manually"
+  ],
+  "questions_or_unknowns": [],
+  "notes": "Updated from onboarding call. Confirmed operational details override demo assumptions.",
+  "_metadata": {
+    "version": "v2",
+    "created_at": "2026-03-04T10:50:36.639284Z",
+    "account_id": "comfort_zone_hvac"
+  }
+}

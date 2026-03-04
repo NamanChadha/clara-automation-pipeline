@@ -1,0 +1,168 @@
+{
+  "account_id": "prestige_fire_protection",
+  "company_name": "Prestige Fire Protection",
+  "generated_at": "2026-03-04T10:50:36.670184Z",
+  "transition": "v1 → v2",
+  "total_changes": 10,
+  "changes": [
+    {
+      "field": "business_hours.regular",
+      "old_value": {
+        "days": "Monday-Friday",
+        "start": "8:00 AM",
+        "end": "5:00 PM"
+      },
+      "new_value": {
+        "days": "Monday-Friday",
+        "start": "8:00 AM",
+        "end": "6:00 PM"
+      },
+      "reason": "Regular business hours confirmed/updated during onboarding"
+    },
+    {
+      "field": "business_hours.saturday",
+      "old_value": {
+        "start": "8:00 AM",
+        "end": "5:00 PM",
+        "note": "inspections only"
+      },
+      "new_value": {
+        "start": "8:00 AM",
+        "end": "6:00 PM",
+        "note": ""
+      },
+      "reason": "Saturday hours confirmed/updated during onboarding"
+    },
+    {
+      "field": "business_hours.seasonal_adjustments",
+      "old_value": [],
+      "new_value": [
+        "Almost. Saturdays we're actually extending to 2 PM now because we're booking more weekend inspections. And I want to add that from November through March, we extend weekday hours to 6 PM because of freeze season — that's when we get the most emergency sprinkler calls from frozen pipes.",
+        "Almost. Saturdays we're actually extending to 2 PM now because we're booking more weekend inspections. And I want to add that from November through March, we extend weekday hours to 6 PM because of freeze season — that's when we get the most emergency sprinkler calls from frozen pipes.",
+        "Smart — seasonal hours. So November through March weekdays are 8 AM to 6 PM, April through October weekdays 8 to 5, Saturdays always 8 to 2. Correct?",
+        "Smart — seasonal hours. So November through March weekdays are 8 AM to 6 PM, April through October weekdays 8 to 5, Saturdays always 8 to 2. Correct?"
+      ],
+      "reason": "Seasonal hour adjustments specified during onboarding"
+    },
+    {
+      "field": "services_supported",
+      "old_value": [
+        "ac",
+        "alarm system",
+        "fire alarm",
+        "fire protection",
+        "fire suppression",
+        "monitoring",
+        "pipe",
+        "sprinkler"
+      ],
+      "new_value": [
+        "ac",
+        "alarm system",
+        "backflow",
+        "fire alarm",
+        "fire protection",
+        "fire suppression",
+        "monitoring",
+        "pipe",
+        "plumbing",
+        "sprinkler"
+      ],
+      "reason": "Services list updated with onboarding data"
+    },
+    {
+      "field": "emergency_definition",
+      "old_value": [
+        "If a sprinkler head is leaking or a fire alarm panel goes into fault",
+        "Active sprinkler discharge",
+        "Fire alarm system in active alarm or fault condition",
+        "Any fire suppression system that's been compromised — like if a valve was shut accidentally and there's no fire protection for a building",
+        "Also if a sprinkler pipe bursts from freezing"
+      ],
+      "new_value": [
+        "If a sprinkler head is leaking or a fire alarm panel goes into fault",
+        "Active sprinkler discharge",
+        "Fire alarm system in active alarm or fault condition",
+        "Any fire suppression system that's been compromised — like if a valve was shut accidentally and there's no fire protection for a building",
+        "Also if a sprinkler pipe bursts from freezing",
+        "Fire alarm in fault or alarm",
+        "Compromised suppression systems",
+        "And burst pipes from freezing",
+        "If a client says they have a fire department inspection within 24 hours and their system is down",
+        "Any active kitchen hood suppression issue is always emergency because that's a real fire hazard."
+      ],
+      "reason": "Emergency definitions refined during onboarding"
+    },
+    {
+      "field": "emergency_routing_rules.chain",
+      "old_value": [
+        {
+          "role": "Supervisor",
+          "phone": "704-555-0300",
+          "timeout_seconds": 45
+        },
+        {
+          "role": "Supervisor",
+          "phone": "704-555-0315",
+          "timeout_seconds": 45
+        },
+        {
+          "role": "Supervisor",
+          "phone": "704-555-0320",
+          "timeout_seconds": 45
+        }
+      ],
+      "new_value": [
+        {
+          "role": "Supervisor",
+          "phone": "704-555-0300",
+          "timeout_seconds": 60
+        },
+        {
+          "role": "Supervisor",
+          "phone": "704-555-0315",
+          "timeout_seconds": 60
+        },
+        {
+          "role": "Supervisor",
+          "phone": "704-555-0320",
+          "timeout_seconds": 60
+        }
+      ],
+      "reason": "Emergency routing chain updated during onboarding"
+    },
+    {
+      "field": "non_emergency_routing_rules.callback_timeframe",
+      "old_value": "(not set)",
+      "new_value": "next business day",
+      "reason": "callback_timeframe updated during onboarding"
+    },
+    {
+      "field": "excluded_services",
+      "old_value": [],
+      "new_value": [
+        "that"
+      ],
+      "reason": "Service exclusions updated during onboarding"
+    },
+    {
+      "field": "custom_greeting",
+      "old_value": "(not set)",
+      "new_value": "Thank you for calling Prestige Fire Protection. This is Clara, how may I assist you today?",
+      "reason": "Custom greeting specified during onboarding"
+    },
+    {
+      "field": "non_emergency_collection_fields",
+      "old_value": [
+        "info"
+      ],
+      "new_value": [
+        "info",
+        "type of inspection — annual",
+        "name",
+        "if they want to leave an email for us to send a confirmation"
+      ],
+      "reason": "Additional data collection fields added during onboarding"
+    }
+  ]
+}

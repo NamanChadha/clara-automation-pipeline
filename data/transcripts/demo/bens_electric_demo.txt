@@ -1,0 +1,41 @@
+Clara Demo Call - Ben's Electric Solutions
+Date: 2024-11-15
+Participants: Alex (Clara Sales), Ben Penoyer (Owner, Ben's Electric Solutions)
+
+[00:00:15] Alex: Hey Ben, thanks for hopping on the call today. I'm excited to show you how Clara can help with your call handling. Before we dive in, can you tell me a little about your business and what problems you're facing with your current phone setup?
+
+[00:00:35] Ben: Yeah sure. So we're Ben's Electric Solutions, we're based out of Tampa, Florida. We do commercial and residential electrical work — panel upgrades, lighting, rewiring, that kind of stuff. We also do emergency electrical work, like if someone has a power outage or exposed wiring, we handle that around the clock.
+
+[00:01:05] Alex: Got it, so you handle emergency calls too. What does your current call handling look like?
+
+[00:01:12] Ben: Right now it's a mess honestly. During business hours we have a receptionist, Sarah, but she gets overwhelmed. We're open Monday through Friday, 7 AM to 5 PM Eastern. After hours, calls go to voicemail and then I personally check them in the morning. But emergency calls... those can't wait. If someone has a live wire down or their panel is sparking, they need help right away.
+
+[00:01:45] Alex: Absolutely, those are safety issues. So how do you define what constitutes an electrical emergency?
+
+[00:01:55] Ben: Good question. For us an emergency is: exposed live wiring, sparking panels, complete power loss at a commercial property, or any situation where there's a fire risk from electrical issues. Basically anything that could hurt someone or damage property if we don't get there fast.
+
+[00:02:20] Alex: That's really clear. And when those emergency calls come in after hours, who should they be routed to?
+
+[00:02:30] Ben: So we have an on-call technician. Right now it rotates weekly. The primary on-call number is 813-555-0142. If they don't pick up, there's a backup at 813-555-0198. And if neither answers within like a minute, then it needs to come to me directly at 813-555-0101.
+
+[00:03:00] Alex: Perfect, so there's a three-level escalation. Let me show you how Clara would handle a call like that. I'm going to play a sample interaction...
+
+[00:03:15] [Clara Demo Agent plays sample greeting and emergency routing flow]
+
+[00:05:30] Ben: That's impressive. It sounds very natural. What about regular calls during the day? Like someone wanting to schedule a panel upgrade?
+
+[00:05:42] Alex: Great question. During business hours, Clara would greet the caller, ask what they need, collect their name and callback number, and then transfer them to your office. If the transfer doesn't go through, Clara would let the caller know that someone will call them back within 30 minutes and take down the details.
+
+[00:06:10] Ben: That works. We also use ServiceTrade for our job management. Can Clara create jobs in there?
+
+[00:06:20] Alex: We can integrate with ServiceTrade. What types of jobs would you want Clara to create versus just collect information for?
+
+[00:06:30] Ben: For non-emergency stuff, Clara can create the service request in ServiceTrade. But for emergency calls, don't create anything — just route the call and let the technician handle the paperwork after. Oh and one more thing — we do NOT do generator installations. If someone calls about generators, just let them know we don't offer that service and recommend they call someone else.
+
+[00:07:05] Alex: Noted. No generator work, and emergency calls get routed not ticketed. This is exactly the kind of configuration we handle. Want me to put together a proposal?
+
+[00:07:15] Ben: Yeah let's do it. I think this could really help us. Our address is 4521 West Kennedy Boulevard, Tampa, FL 33609 by the way, in case you need that.
+
+[00:07:30] Alex: Perfect. I'll get that proposal over to you by end of day. Thanks Ben!
+
+[00:07:35] Ben: Thanks Alex, talk soon.

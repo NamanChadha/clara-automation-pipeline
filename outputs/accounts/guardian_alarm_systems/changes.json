@@ -1,0 +1,161 @@
+{
+  "account_id": "guardian_alarm_systems",
+  "company_name": "Guardian Alarm Systems",
+  "generated_at": "2026-03-04T10:50:36.655752Z",
+  "transition": "v1 → v2",
+  "total_changes": 12,
+  "changes": [
+    {
+      "field": "business_hours.holidays",
+      "old_value": [
+        "Monday through Friday, 8:30 AM to 5:30 PM Eastern. Closed weekends and federal holidays."
+      ],
+      "new_value": [
+        "Business hours — Monday through Friday 8:30 AM to 5:30 PM Eastern, closed weekends and federal holidays. Correct?",
+        "That's right. But I want to add — we observe these specific holidays: New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving, day after Thanksgiving, Christmas Eve, and Christmas Day. On those days treat everything as after-hours protocol.",
+        "Got it, eight named holidays. Emergency definitions on the service side — access control completely down, alarm panel offline or comm failure, suspected tampering. Changes?"
+      ],
+      "reason": "Holiday schedule specified during onboarding"
+    },
+    {
+      "field": "services_supported",
+      "old_value": [
+        "ac",
+        "access control",
+        "alarm system",
+        "cctv",
+        "monitoring",
+        "security"
+      ],
+      "new_value": [
+        "ac",
+        "access control",
+        "alarm system",
+        "cctv",
+        "monitoring",
+        "security"
+      ],
+      "reason": "Services list updated with onboarding data"
+    },
+    {
+      "field": "emergency_definition",
+      "old_value": [
+        "So there's a gap between true alarm emergencies that your monitoring station handles",
+        "An emergency for us on the service side would be: access control system completely down",
+        "Alarm panel offline or in communication failure",
+        "A client reporting they think their system was tampered with"
+      ],
+      "new_value": [
+        "So there's a gap between true alarm emergencies that your monitoring station handles",
+        "An emergency for us on the service side would be: access control system completely down",
+        "Alarm panel offline or in communication failure",
+        "A client reporting they think their system was tampered with",
+        "Emergency definitions on the service side — access control completely down",
+        "Alarm panel offline or comm failure",
+        "Suspected tampering",
+        "Add one: CCTV system failure at a high-security client site",
+        "If any of them call about CCTV being down",
+        "Also I want to refine \"access control down\" — it's only emergency if it affects building entry"
+      ],
+      "reason": "Emergency definitions refined during onboarding"
+    },
+    {
+      "field": "emergency_routing_rules.chain",
+      "old_value": [
+        {
+          "role": "Field Supervisor",
+          "phone": "404-555-0450",
+          "timeout_seconds": 60
+        },
+        {
+          "role": "Field Supervisor",
+          "phone": "404-555-0460",
+          "timeout_seconds": 60
+        },
+        {
+          "role": "Field Supervisor",
+          "phone": "404-555-0475",
+          "timeout_seconds": 60
+        }
+      ],
+      "new_value": [
+        {
+          "role": "Field Supervisor",
+          "phone": "404-555-0450",
+          "timeout_seconds": 60
+        },
+        {
+          "role": "Field Supervisor",
+          "phone": "404-555-0460",
+          "timeout_seconds": 60
+        },
+        {
+          "role": "Field Supervisor",
+          "phone": "404-555-0475",
+          "timeout_seconds": 60
+        },
+        {
+          "role": "Contact",
+          "phone": "404-555-0440",
+          "timeout_seconds": 30
+        }
+      ],
+      "reason": "Emergency routing chain updated during onboarding"
+    },
+    {
+      "field": "emergency_routing_rules.fallback_message",
+      "old_value": "(not set)",
+      "new_value": "I",
+      "reason": "Fallback message specified during onboarding"
+    },
+    {
+      "field": "non_emergency_routing_rules.office_number",
+      "old_value": "(not set)",
+      "new_value": "404-555-0440",
+      "reason": "office_number updated during onboarding"
+    },
+    {
+      "field": "non_emergency_routing_rules.callback_timeframe",
+      "old_value": "(not set)",
+      "new_value": "next business day",
+      "reason": "callback_timeframe updated during onboarding"
+    },
+    {
+      "field": "call_transfer_rules.office_timeout_seconds",
+      "old_value": "(not set)",
+      "new_value": 30,
+      "reason": "Transfer office_timeout_seconds updated during onboarding"
+    },
+    {
+      "field": "call_transfer_rules.fallback_message",
+      "old_value": "(not set)",
+      "new_value": "I",
+      "reason": "Transfer fallback_message updated during onboarding"
+    },
+    {
+      "field": "excluded_services",
+      "old_value": [],
+      "new_value": [
+        "residential security"
+      ],
+      "reason": "Service exclusions updated during onboarding"
+    },
+    {
+      "field": "custom_greeting",
+      "old_value": "(not set)",
+      "new_value": "Thank you for calling Guardian Alarm Systems. This is Clara, your virtual assistant. How can I help you?",
+      "reason": "Custom greeting specified during onboarding"
+    },
+    {
+      "field": "non_emergency_collection_fields",
+      "old_value": [
+        "company name and check against a client list"
+      ],
+      "new_value": [
+        "company name and check against a client list",
+        "type of business"
+      ],
+      "reason": "Additional data collection fields added during onboarding"
+    }
+  ]
+}

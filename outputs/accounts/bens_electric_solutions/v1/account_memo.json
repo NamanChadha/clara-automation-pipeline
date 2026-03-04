@@ -1,0 +1,76 @@
+{
+  "account_id": "bens_electric_solutions",
+  "company_name": "Ben's Electric Solutions",
+  "business_hours": {
+    "regular": {
+      "days": "Monday-Friday",
+      "start": "7:00 AM",
+      "end": "5:00 PM"
+    },
+    "saturday": {},
+    "sunday": {},
+    "timezone": "Eastern",
+    "seasonal_adjustments": [],
+    "holidays": []
+  },
+  "office_address": "4521 West Kennedy Boulevard, Tampa, FL 33609",
+  "services_supported": [
+    "electrical work",
+    "lighting",
+    "rewiring",
+    "panel upgrade",
+    "wiring",
+    "ac"
+  ],
+  "emergency_definition": [
+    "Exposed live wiring",
+    "Sparking panels",
+    "Complete power loss at a commercial property",
+    "Any situation where there's a fire risk from electrical issues"
+  ],
+  "emergency_routing_rules": {
+    "chain": [
+      {
+        "role": "Backup Technician",
+        "phone": "813-555-0142",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Backup Technician",
+        "phone": "813-555-0198",
+        "timeout_seconds": 60
+      },
+      {
+        "role": "Backup Technician",
+        "phone": "813-555-0101",
+        "timeout_seconds": 60
+      }
+    ]
+  },
+  "non_emergency_routing_rules": {
+    "callback_timeframe": "within 30 minutes"
+  },
+  "call_transfer_rules": {},
+  "integration_constraints": [
+    "For non-emergency stuff, Clara can create the service request in ServiceTrade. But for emergency calls, don't create anything — just route the call and let the technician handle the paperwork after. Oh and one more thing — we do NOT do generator installations. If someone calls about generators, just let them know we don't offer that service and recommend they call someone else."
+  ],
+  "after_hours_flow_summary": "After hours: Greet caller, note office is closed, determine purpose, check if emergency. If emergency: collect name, number, address, attempt routing via escalation chain. If non-emergency: collect details, confirm next-business-day callback.",
+  "office_hours_flow_summary": "Business hours: Greet caller, determine purpose, check if emergency. If emergency: collect critical info and route immediately. If routine: collect name and number, transfer to office. If transfer fails: take message, confirm callback timeframe.",
+  "excluded_services": [
+    "generator installations",
+    "that service and recommend they call someone else"
+  ],
+  "custom_greeting": null,
+  "non_emergency_collection_fields": [
+    "name and callback number",
+    "information for?",
+    "they need"
+  ],
+  "questions_or_unknowns": [],
+  "notes": "Extracted from demo call — details may be preliminary and subject to change during onboarding.",
+  "_metadata": {
+    "version": "v1",
+    "created_at": "2026-03-04T10:50:36.583500Z",
+    "account_id": "bens_electric_solutions"
+  }
+}
