@@ -61,9 +61,9 @@
   "after_hours_flow_summary": "For emergencies from G&M Pressure Washing (property manager for Chevron and ESSO gas stations), Clara will patch the call through to Ben's second number. For all other after-hours calls, Clara will inform callers that the business is closed and will get back to them the next business day.",
   "office_hours_flow_summary": "Clara will act as the first point of contact. It will handle inquiries from new clients, small jobs, service calls, appointment scheduling, and quote requests. Clara will mention the service call fee ($115 call-out fee, then $98/hour for residential work, or $49/half-hour) only when explicitly asked by the caller. Post-call notifications will be sent via email to info@BENSELECTRICSOLUTIONSTEAM.com and via SMS to Ben's main phone line. Calls can be transferred to Ben's second phone number if a direct conversation is needed.",
   "excluded_services": [
+    "but would be interested",
     "pool installation",
-    "full hot tub installation",
-    "but would be interested"
+    "full hot tub installation"
   ],
   "custom_greeting": null,
   "notes": "Ben currently uses an Android device for his main business line. He is in the process of setting up a second phone number for personal use, which Clara will use for transferring calls to him. The initial setup involves conditional call forwarding from Ben's main line to Clara (if calls are unanswered or declined). Once the second number is active, Clara will become the primary call answerer. Testing of the Clara agent is scheduled for today, with a follow-up review call planned for Friday at 2:00 PM.",
@@ -73,7 +73,7 @@
   ],
   "_metadata": {
     "version": "v2",
-    "created_at": "2026-03-04T14:23:05.333908Z",
+    "created_at": "2026-03-04T18:33:03.715760Z",
     "account_id": "bens_electric_solutions"
   }
 }

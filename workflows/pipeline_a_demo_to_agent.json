@@ -29,36 +29,36 @@
     },
     {
       "parameters": {
-        "command": "python /data/scripts/parse_transcript.py --file \"{{ $json.body.transcript_path }}\""
+        "jsCode": "const { execSync } = require('child_process');\nconst transcriptPath = $input.first().json.body.transcript_path;\nconst stdout = execSync('python /data/scripts/parse_transcript.py --file \"' + transcriptPath + '\"', { encoding: 'utf-8' });\nreturn [{json: { stdout: stdout.trim() }}];"
       },
       "id": "parse-transcript",
       "name": "Parse Transcript",
-      "type": "n8n-nodes-base.executeCommand",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [690, 300],
       "notesInFlow": true,
       "notes": "Normalizes transcript, detects call type, extracts company name"
     },
     {
       "parameters": {
-        "command": "cd /data && python -c \"\nimport sys, json\nsys.path.insert(0, '/data')\nfrom scripts.parse_transcript import parse_transcript\nfrom scripts.extract_memo import extract_account_memo\nfrom scripts.generate_agent_spec import generate_agent_spec\nfrom scripts.utils.storage import save_account_memo, save_agent_spec\n\ntranscript = parse_transcript('{{ $json.body.transcript_path }}')\nmemo = extract_account_memo(transcript)\naccount_id = transcript['account_id']\n\nmemo_path = save_account_memo(account_id, memo, 'v1')\nspec = generate_agent_spec(memo, 'v1')\nspec_path = save_agent_spec(account_id, spec, 'v1')\n\nprint(json.dumps({\n    'account_id': account_id,\n    'company_name': transcript['company_name'],\n    'memo_path': memo_path,\n    'spec_path': spec_path,\n    'status': 'success'\n}))\n\""
+        "jsCode": "const { execSync } = require('child_process');\nconst transcriptPath = $input.first().json.body.transcript_path;\nconst pyScript = [\n  'import sys, json',\n  'sys.path.insert(0, \"/data\")',\n  'from scripts.parse_transcript import parse_transcript',\n  'from scripts.extract_memo import extract_account_memo',\n  'from scripts.generate_agent_spec import generate_agent_spec',\n  'from scripts.utils.storage import save_account_memo, save_agent_spec',\n  '',\n  'transcript = parse_transcript(\"' + transcriptPath + '\")',\n  'memo = extract_account_memo(transcript)',\n  'account_id = transcript[\"account_id\"]',\n  '',\n  'memo_path = save_account_memo(account_id, memo, \"v1\")',\n  'spec = generate_agent_spec(memo, \"v1\")',\n  'spec_path = save_agent_spec(account_id, spec, \"v1\")',\n  '',\n  'print(json.dumps({',\n  '    \"account_id\": account_id,',\n  '    \"company_name\": transcript[\"company_name\"],',\n  '    \"memo_path\": memo_path,',\n  '    \"spec_path\": spec_path,',\n  '    \"status\": \"success\"',\n  '}))',\n].join('\\n');\nconst stdout = execSync('cd /data && python -c \\'' + pyScript + '\\'', { encoding: 'utf-8' });\nreturn [{json: { stdout: stdout.trim() }}];"
       },
       "id": "extract-and-generate",
       "name": "Extract Memo & Generate Agent Spec",
-      "type": "n8n-nodes-base.executeCommand",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [910, 300],
       "notesInFlow": true,
       "notes": "Extracts account memo from transcript and generates Retell agent spec v1"
     },
     {
       "parameters": {
-        "functionCode": "const output = JSON.parse($input.item.json.stdout);\nreturn [{\n  json: {\n    account_id: output.account_id,\n    company_name: output.company_name,\n    memo_path: output.memo_path,\n    spec_path: output.spec_path,\n    status: output.status,\n    pipeline: 'A',\n    version: 'v1',\n    timestamp: new Date().toISOString()\n  }\n}];"
+        "jsCode": "const output = JSON.parse($input.first().json.stdout);\nreturn [{\n  json: {\n    account_id: output.account_id,\n    company_name: output.company_name,\n    memo_path: output.memo_path,\n    spec_path: output.spec_path,\n    status: output.status,\n    pipeline: 'A',\n    version: 'v1',\n    timestamp: new Date().toISOString()\n  }\n}];"
       },
       "id": "format-output",
       "name": "Format Output",
       "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
+      "typeVersion": 2,
       "position": [1130, 300]
     },
     {

@@ -34,6 +34,7 @@ services:
       - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD:-changeme}
       - GENERIC_TIMEZONE=America/New_York
       - N8N_SECURE_COOKIE=false
+      - NODE_FUNCTION_ALLOW_BUILTIN=child_process
     restart: unless-stopped
 
 volumes:

@@ -28,6 +28,9 @@ desktop.ini
 # Environment files
 .env
 
+# Confidential data (transcripts & recordings)
+data/
+
 # Docker
 n8n_data/
 

@@ -71,9 +71,9 @@
   "after_hours_flow_summary": "Clara AI takes calls, can book jobs for the next business day (e.g., after 8 AM). If Ben is unavailable, the system can pivot to backup workflows (e.g., schedule for tomorrow after 8 AM, route to team member, route to someone on call). Emergency calls are automatically routed to Ben.",
   "office_hours_flow_summary": "Clara AI acts as a receptionist, taking calls 24/7. It screens calls, qualifies jobs, gathers customer and job details. It filters out irrelevant calls (e.g., sales calls). It aims to book meetings/assessments. It sends email and text notifications with call summaries and recordings/transcripts. It can escalate/route calls to specific departments (e.g., accounting) or team members based on the call's intent. It can directly transfer specific calls (e.g., from family, preferred customers) to Ben without screening. It can upsell club memberships during conversations. Ben currently assigns calls from the dashboard to team members, with future automation planned.",
   "excluded_services": [
+    "but would be interested",
     "pool installation",
-    "full hot tub installation",
-    "but would be interested"
+    "full hot tub installation"
   ],
   "custom_greeting": null,
   "notes": "Company is currently a sole proprietorship, plans to incorporate this year. Client contact is Ben Penoyer, with plans to transition some responsibilities to Greg (Operations Manager/Estimator). Ben uses Jobber for CRM and QuickBooks for accounting, with invoicing primarily through Jobber. Ben previously tried a virtual assistant (live person) which was not a good fit. Clara AI offers a field copilot solution, which was not pursued further during this call. Clara AI's booking feature for field technician appointments was rolled back due to unpredictable job durations; however, it can confirm site visits or specific pre-defined appointments. Clara AI will not have its own calendar/scheduler. Clara AI will provide a new phone number for call forwarding or can integrate with existing numbers for screening. Pricing is $249/month for 500 minutes (excluding sales filtration calls). Client is interested in a 3-month plan, with the current price locked for 12 months if they continue after the initial 3 months. A kickoff call is scheduled for January 9, 2026, at noon (30 minutes).",
@@ -84,7 +84,7 @@
   ],
   "_metadata": {
     "version": "v1",
-    "created_at": "2026-03-04T14:23:05.303896Z",
+    "created_at": "2026-03-04T18:33:03.627879Z",
     "account_id": "bens_electric_solutions"
   }
 }
