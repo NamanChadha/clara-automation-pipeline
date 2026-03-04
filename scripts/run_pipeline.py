@@ -70,6 +70,16 @@ class PipelineRunner:
         print("  PIPELINE A: Demo Call → Preliminary Agent (v1)")
         print("=" * 60)
 
+        # Transcribe any audio files found
+        audio_extensions = ('.mp4a', '.m4a', '.mp3', '.wav')
+        for f in os.listdir(DEMO_DIR):
+            if f.endswith(audio_extensions):
+                txt_path = os.path.join(DEMO_DIR, f.rsplit('.', 1)[0] + '.txt')
+                if not os.path.exists(txt_path):
+                    from scripts.transcribe_audio import transcribe
+                    audio_path = os.path.join(DEMO_DIR, f)
+                    transcribe(audio_path)
+
         demo_transcripts = load_all_transcripts(DEMO_DIR)
 
         if not demo_transcripts:
@@ -118,6 +128,16 @@ class PipelineRunner:
         print("\n" + "=" * 60)
         print("  PIPELINE B: Onboarding → Agent Modification (v2)")
         print("=" * 60)
+
+        # Transcribe any audio files found in onboarding
+        audio_extensions = ('.mp4a', '.m4a', '.mp3', '.wav')
+        for f in os.listdir(ONBOARDING_DIR):
+            if f.endswith(audio_extensions):
+                txt_path = os.path.join(ONBOARDING_DIR, f.rsplit('.', 1)[0] + '.txt')
+                if not os.path.exists(txt_path):
+                    from scripts.transcribe_audio import transcribe
+                    audio_path = os.path.join(ONBOARDING_DIR, f)
+                    transcribe(audio_path)
 
         # Load all transcripts
         demo_transcripts = load_all_transcripts(DEMO_DIR)

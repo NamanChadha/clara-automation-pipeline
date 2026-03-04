@@ -90,7 +90,9 @@ def _categorize_changes(changes: List[Dict]) -> Dict[str, List[Dict]]:
         '⏰ Business Hours': [],
         '🚨 Emergency Configuration': [],
         '📞 Routing & Transfer': [],
+        '💰 Pricing & Fees': [],
         '🔧 Integration & Constraints': [],
+        '👤 Contact Info': [],
         '📝 Other Changes': [],
     }
 
@@ -102,8 +104,14 @@ def _categorize_changes(changes: List[Dict]) -> Dict[str, List[Dict]]:
             categories['🚨 Emergency Configuration'].append(change)
         elif 'routing' in field or 'transfer' in field:
             categories['📞 Routing & Transfer'].append(change)
-        elif 'integration' in field or 'constraint' in field or 'service' in field.lower():
+        elif 'fee' in field or 'price' in field or 'rate' in field or 'pricing' in field:
+            categories['💰 Pricing & Fees'].append(change)
+        elif 'integration' in field or 'constraint' in field:
             categories['🔧 Integration & Constraints'].append(change)
+        elif 'contact' in field or 'email' in field or 'name' in field:
+            categories['👤 Contact Info'].append(change)
+        elif 'service' in field.lower():
+             categories['🔧 Integration & Constraints'].append(change)
         else:
             categories['📝 Other Changes'].append(change)
 

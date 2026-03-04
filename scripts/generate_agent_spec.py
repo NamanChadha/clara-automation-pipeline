@@ -68,6 +68,9 @@ def generate_agent_spec(memo: Dict, version: str = "v1") -> Dict:
             'office_address': memo.get('office_address', ''),
             'emergency_routing_chain': memo.get('emergency_routing_rules', {}).get('chain', []),
             'office_number': memo.get('non_emergency_routing_rules', {}).get('office_number', ''),
+            'service_fees': memo.get('service_fees', {}),
+            'contact_info': memo.get('contact_info', {}),
+            'special_handling': memo.get('emergency_routing_rules', {}).get('special_handling', {}),
         },
 
         # Tool invocation placeholders (internal - not shown to caller)

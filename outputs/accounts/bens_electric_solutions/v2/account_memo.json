@@ -1,97 +1,79 @@
 {
   "account_id": "bens_electric_solutions",
   "company_name": "Ben's Electric Solutions",
+  "contact_name": "Ben",
+  "contact_email": "info@BENSELECTRICSOLUTIONSTEAM.com",
   "business_hours": {
     "regular": {
-      "days": "Monday-Friday",
-      "start": "7:00 AM",
-      "end": "5:30 PM"
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "start": "08:00",
+      "end": "16:30"
     },
-    "saturday": {
-      "start": "7:00 AM",
-      "end": "5:30 PM",
-      "note": "emergency callbacks"
-    },
-    "sunday": {
-      "note": "Closed"
-    },
+    "saturday": {},
+    "sunday": {},
     "timezone": "Eastern",
     "seasonal_adjustments": [],
     "holidays": []
   },
-  "office_address": "4521 West Kennedy Boulevard, Tampa, FL 33609",
+  "office_address": "",
   "services_supported": [
-    "ac",
-    "electrical work",
-    "lighting",
-    "panel upgrade",
-    "rewiring",
-    "wiring"
+    "new client inquiries",
+    "small job inquiries",
+    "service calls",
+    "appointment scheduling",
+    "quote requests",
+    "providing service call fee details when asked"
   ],
+  "service_fees": {
+    "service_call_fee": "$115",
+    "hourly_rate": "$98",
+    "half_hour_rate": "$49"
+  },
   "emergency_definition": [
-    "Exposed live wiring",
-    "Sparking panels",
-    "Complete power loss at a commercial property",
-    "Any situation where there's a fire risk from electrical issues",
-    "Complete power loss at commercial properties",
-    "I want to add one more: any electrical issue at a healthcare facility regardless of the specific problem",
-    "If a hospital or medical office calls with any electrical issue",
-    "Healthcare gets automatic emergency priority"
+    "existing builders",
+    "G&M Pressure Washing (property manager for Chevron and ESSO gas stations)"
   ],
   "emergency_routing_rules": {
-    "chain": [
-      {
-        "role": "Backup Technician",
-        "phone": "813-555-0142",
-        "timeout_seconds": 60
-      },
-      {
-        "role": "Backup Technician",
-        "phone": "813-555-0198",
-        "timeout_seconds": 60
-      },
-      {
-        "role": "Backup Technician",
-        "phone": "813-555-0101",
-        "timeout_seconds": 60
-      },
-      {
-        "role": "Contact",
-        "phone": "813-555-0100",
-        "timeout_seconds": 30
-      }
+    "chain": [],
+    "order": [
+      "transfer to Ben's second phone number (once available)"
     ]
   },
   "non_emergency_routing_rules": {
-    "callback_timeframe": "within 1 hour",
-    "office_number": "813-555-0100"
+    "action": "Clara to answer calls, qualify intent, provide service fee information if asked, and send post-call notifications.",
+    "collect_fields": [
+      "appointment details",
+      "quote request details",
+      "reason for calling"
+    ]
   },
-  "call_transfer_rules": {
-    "office_timeout_seconds": 30
-  },
+  "call_transfer_rules": {},
   "integration_constraints": [
-    "For non-emergency stuff, Clara can create the service request in ServiceTrade. But for emergency calls, don't create anything — just route the call and let the technician handle the paperwork after. Oh and one more thing — we do NOT do generator installations. If someone calls about generators, just let them know we don't offer that service and recommend they call someone else.",
-    "Here's the updated rule: Clara can create service requests in ServiceTrade for panel upgrades, lighting installations, and general maintenance requests. Do NOT create tickets for emergency calls — those just get routed. And do NOT create tickets for anything involving permits or inspections — those need to go through our permitting team first. Oh, and we still don't do generators — politely decline those."
+    "conditional call forwarding from Ben's Android phone (if call is unanswered or declined)",
+    "requires Ben's second phone number for direct transfers once active"
   ],
-  "after_hours_flow_summary": "After hours: Greet caller, note office is closed, determine purpose, check if emergency. If emergency: collect name, number, address, attempt routing via escalation chain. If non-emergency: collect details, confirm next-business-day callback.",
-  "office_hours_flow_summary": "Business hours: Greet caller, determine purpose, check if emergency. If emergency: collect critical info and route immediately. If routine: collect name and number, transfer to office. If transfer fails: take message, confirm callback timeframe.",
+  "after_hours_flow_summary": "For emergencies from G&M Pressure Washing (property manager for Chevron and ESSO gas stations), Clara will patch the call through to Ben's second number. For all other after-hours calls, Clara will inform callers that the business is closed and will get back to them the next business day.",
+  "office_hours_flow_summary": "Clara will act as the first point of contact. It will handle inquiries from new clients, small jobs, service calls, appointment scheduling, and quote requests. Clara will mention the service call fee ($115 call-out fee, then $98/hour for residential work, or $49/half-hour) only when explicitly asked by the caller. Post-call notifications will be sent via email to info@BENSELECTRICSOLUTIONSTEAM.com and via SMS to Ben's main phone line. Calls can be transferred to Ben's second phone number if a direct conversation is needed.",
   "excluded_services": [
-    "generator installations",
-    "that service and recommend they call someone else",
-    "generators — politely decline those"
+    "pool installation",
+    "full hot tub installation",
+    "but would be interested"
   ],
-  "custom_greeting": "Thank you for calling Ben",
-  "non_emergency_collection_fields": [
-    "name and callback number",
-    "information for?",
-    "they need",
-    "name"
+  "custom_greeting": null,
+  "notes": "Ben currently uses an Android device for his main business line. He is in the process of setting up a second phone number for personal use, which Clara will use for transferring calls to him. The initial setup involves conditional call forwarding from Ben's main line to Clara (if calls are unanswered or declined). Once the second number is active, Clara will become the primary call answerer. Testing of the Clara agent is scheduled for today, with a follow-up review call planned for Friday at 2:00 PM.",
+  "questions_or_unknowns": [
+    "Office address still not provided",
+    "Emergency routing chain still not specified"
   ],
-  "questions_or_unknowns": [],
-  "notes": "Updated from onboarding call. Confirmed operational details override demo assumptions.",
   "_metadata": {
     "version": "v2",
-    "created_at": "2026-03-04T10:50:36.624523Z",
+    "created_at": "2026-03-04T14:23:05.333908Z",
     "account_id": "bens_electric_solutions"
   }
 }

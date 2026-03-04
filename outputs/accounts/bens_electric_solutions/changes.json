@@ -1,187 +1,191 @@
 {
   "account_id": "bens_electric_solutions",
   "company_name": "Ben's Electric Solutions",
-  "generated_at": "2026-03-04T10:50:36.627495Z",
+  "generated_at": "2026-03-04T14:23:05.336373Z",
   "transition": "v1 → v2",
-  "total_changes": 13,
+  "total_changes": 17,
   "changes": [
     {
-      "field": "business_hours.regular",
-      "old_value": {
-        "days": "Monday-Friday",
-        "start": "7:00 AM",
-        "end": "5:00 PM"
-      },
-      "new_value": {
-        "days": "Monday-Friday",
-        "start": "7:00 AM",
-        "end": "5:30 PM"
-      },
-      "reason": "Regular business hours confirmed/updated during onboarding"
+      "field": "contact_name",
+      "old_value": "Ben Penoyer",
+      "new_value": "Ben",
+      "reason": "confirmed during onboarding call"
     },
     {
-      "field": "business_hours.saturday",
-      "old_value": "(not set)",
-      "new_value": {
-        "start": "7:00 AM",
-        "end": "5:30 PM",
-        "note": "emergency callbacks"
-      },
-      "reason": "Saturday hours confirmed/updated during onboarding"
+      "field": "contact_email",
+      "old_value": "Ben@Benselectricsolutionsteam.com",
+      "new_value": "info@BENSELECTRICSOLUTIONSTEAM.com",
+      "reason": "confirmed during onboarding call"
     },
     {
-      "field": "business_hours.sunday",
-      "old_value": "(not set)",
-      "new_value": {
-        "note": "Closed"
-      },
-      "reason": "Sunday hours updated during onboarding"
+      "field": "business_hours.days",
+      "old_value": [],
+      "new_value": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "reason": "confirmed during onboarding call"
+    },
+    {
+      "field": "business_hours.start",
+      "old_value": null,
+      "new_value": "08:00",
+      "reason": "confirmed during onboarding call"
+    },
+    {
+      "field": "business_hours.end",
+      "old_value": null,
+      "new_value": "16:30",
+      "reason": "confirmed during onboarding call"
     },
     {
       "field": "services_supported",
       "old_value": [
-        "ac",
-        "electrical work",
-        "lighting",
-        "panel upgrade",
-        "rewiring",
-        "wiring"
+        "Outlet replacements",
+        "Aluminum wiring mitigation",
+        "Service calls",
+        "Small jobs",
+        "Odd jobs",
+        "Renovations",
+        "Troubleshooting",
+        "New custom home projects",
+        "Tenant infill projects",
+        "Tenant improvement projects",
+        "EV chargers",
+        "Hot tub hookups (electrical installation)",
+        "Panel changes",
+        "Service maintenance",
+        "Plumbing and gas line connections (for hot tubs)",
+        "Generator connection and installation (for hot tubs)",
+        "LED upgrades"
       ],
       "new_value": [
-        "ac",
-        "electrical work",
-        "lighting",
-        "panel upgrade",
-        "rewiring",
-        "wiring"
+        "new client inquiries",
+        "small job inquiries",
+        "service calls",
+        "appointment scheduling",
+        "quote requests",
+        "providing service call fee details when asked"
       ],
-      "reason": "Services list updated with onboarding data"
+      "reason": "confirmed during onboarding call"
     },
     {
       "field": "emergency_definition",
       "old_value": [
-        "Exposed live wiring",
-        "Sparking panels",
-        "Complete power loss at a commercial property",
-        "Any situation where there's a fire risk from electrical issues"
+        "Gas station pumps go down",
+        "Sparks coming out of certain circuit boards",
+        "No electricity"
       ],
       "new_value": [
-        "Exposed live wiring",
-        "Sparking panels",
-        "Complete power loss at a commercial property",
-        "Any situation where there's a fire risk from electrical issues",
-        "Complete power loss at commercial properties",
-        "I want to add one more: any electrical issue at a healthcare facility regardless of the specific problem",
-        "If a hospital or medical office calls with any electrical issue",
-        "Healthcare gets automatic emergency priority"
+        "existing builders",
+        "G&M Pressure Washing (property manager for Chevron and ESSO gas stations)"
       ],
       "reason": "Emergency definitions refined during onboarding"
     },
     {
-      "field": "emergency_routing_rules.chain",
+      "field": "emergency_routing_rules.order",
       "old_value": [
-        {
-          "role": "Backup Technician",
-          "phone": "813-555-0142",
-          "timeout_seconds": 60
-        },
-        {
-          "role": "Backup Technician",
-          "phone": "813-555-0198",
-          "timeout_seconds": 60
-        },
-        {
-          "role": "Backup Technician",
-          "phone": "813-555-0101",
-          "timeout_seconds": 60
-        }
+        "primary_contact"
       ],
       "new_value": [
-        {
-          "role": "Backup Technician",
-          "phone": "813-555-0142",
-          "timeout_seconds": 60
-        },
-        {
-          "role": "Backup Technician",
-          "phone": "813-555-0198",
-          "timeout_seconds": 60
-        },
-        {
-          "role": "Backup Technician",
-          "phone": "813-555-0101",
-          "timeout_seconds": 60
-        },
-        {
-          "role": "Contact",
-          "phone": "813-555-0100",
-          "timeout_seconds": 30
-        }
+        "transfer to Ben's second phone number (once available)"
       ],
-      "reason": "Emergency routing chain updated during onboarding"
+      "reason": "confirmed during onboarding call"
     },
     {
-      "field": "non_emergency_routing_rules.office_number",
-      "old_value": "(not set)",
-      "new_value": "813-555-0100",
-      "reason": "office_number updated during onboarding"
+      "field": "after_hours_flow_summary",
+      "old_value": "Clara AI takes calls, can book jobs for the next business day (e.g., after 8 AM). If Ben is unavailable, the system can pivot to backup workflows (e.g., schedule for tomorrow after 8 AM, route to team member, route to someone on call). Emergency calls are automatically routed to Ben.",
+      "new_value": "For emergencies from G&M Pressure Washing (property manager for Chevron and ESSO gas stations), Clara will patch the call through to Ben's second number. For all other after-hours calls, Clara will inform callers that the business is closed and will get back to them the next business day.",
+      "reason": "confirmed during onboarding call"
     },
     {
-      "field": "non_emergency_routing_rules.callback_timeframe",
-      "old_value": "within 30 minutes",
-      "new_value": "within 1 hour",
-      "reason": "callback_timeframe updated during onboarding"
+      "field": "office_hours_flow_summary",
+      "old_value": "Clara AI acts as a receptionist, taking calls 24/7. It screens calls, qualifies jobs, gathers customer and job details. It filters out irrelevant calls (e.g., sales calls). It aims to book meetings/assessments. It sends email and text notifications with call summaries and recordings/transcripts. It can escalate/route calls to specific departments (e.g., accounting) or team members based on the call's intent. It can directly transfer specific calls (e.g., from family, preferred customers) to Ben without screening. It can upsell club memberships during conversations. Ben currently assigns calls from the dashboard to team members, with future automation planned.",
+      "new_value": "Clara will act as the first point of contact. It will handle inquiries from new clients, small jobs, service calls, appointment scheduling, and quote requests. Clara will mention the service call fee ($115 call-out fee, then $98/hour for residential work, or $49/half-hour) only when explicitly asked by the caller. Post-call notifications will be sent via email to info@BENSELECTRICSOLUTIONSTEAM.com and via SMS to Ben's main phone line. Calls can be transferred to Ben's second phone number if a direct conversation is needed.",
+      "reason": "confirmed during onboarding call"
     },
     {
-      "field": "call_transfer_rules.office_timeout_seconds",
-      "old_value": "(not set)",
-      "new_value": 30,
-      "reason": "Transfer office_timeout_seconds updated during onboarding"
+      "field": "non_emergency_routing_rules.action",
+      "old_value": "Clara AI acts as a receptionist, screens calls, qualifies jobs, gathers customer and job details, filters out irrelevant calls (e.g., sales calls), aims to book meetings/assessments, sends email and text notifications with call summaries, recordings, and transcripts. It can escalate/route calls to specific departments or team members based on intent, and directly transfer specific calls (e.g., from family, preferred customers) to Ben without screening. Ben currently assigns calls from the dashboard to team members.",
+      "new_value": "Clara to answer calls, qualify intent, provide service fee information if asked, and send post-call notifications.",
+      "reason": "confirmed during onboarding call"
+    },
+    {
+      "field": "non_emergency_routing_rules.collect_fields",
+      "old_value": [
+        "Customer Name",
+        "Address where work will be done",
+        "Best phone number to reach customer",
+        "Preferred date/time for assessment/service",
+        "Nature of the electrical problem/service request",
+        "Electrical requirements for specific models (e.g., hot tub, EV charger)",
+        "Setup details (e.g., hot tub location, distance, circuit requirements)"
+      ],
+      "new_value": [
+        "appointment details",
+        "quote request details",
+        "reason for calling"
+      ],
+      "reason": "confirmed during onboarding call"
     },
     {
       "field": "integration_constraints",
       "old_value": [
-        "For non-emergency stuff, Clara can create the service request in ServiceTrade. But for emergency calls, don't create anything — just route the call and let the technician handle the paperwork after. Oh and one more thing — we do NOT do generator installations. If someone calls about generators, just let them know we don't offer that service and recommend they call someone else."
+        "Jobber: Integration is in process/coming soon (for CRM and invoicing)",
+        "QuickBooks: Used for accounting, Clara can integrate into accounting systems",
+        "Service Titan: Integrated",
+        "Housecall Pro: Integrated",
+        "Service Fusion: Integrated",
+        "Zen platform: Integrated"
       ],
       "new_value": [
-        "For non-emergency stuff, Clara can create the service request in ServiceTrade. But for emergency calls, don't create anything — just route the call and let the technician handle the paperwork after. Oh and one more thing — we do NOT do generator installations. If someone calls about generators, just let them know we don't offer that service and recommend they call someone else.",
-        "Here's the updated rule: Clara can create service requests in ServiceTrade for panel upgrades, lighting installations, and general maintenance requests. Do NOT create tickets for emergency calls — those just get routed. And do NOT create tickets for anything involving permits or inspections — those need to go through our permitting team first. Oh, and we still don't do generators — politely decline those."
+        "conditional call forwarding from Ben's Android phone (if call is unanswered or declined)",
+        "requires Ben's second phone number for direct transfers once active"
       ],
-      "reason": "Integration constraints updated during onboarding"
+      "reason": "confirmed during onboarding call"
     },
     {
-      "field": "excluded_services",
+      "field": "non_emergency_routing_rules.action",
+      "old_value": "Clara AI acts as a receptionist, screens calls, qualifies jobs, gathers customer and job details, filters out irrelevant calls (e.g., sales calls), aims to book meetings/assessments, sends email and text notifications with call summaries, recordings, and transcripts. It can escalate/route calls to specific departments or team members based on intent, and directly transfer specific calls (e.g., from family, preferred customers) to Ben without screening. Ben currently assigns calls from the dashboard to team members.",
+      "new_value": "Clara to answer calls, qualify intent, provide service fee information if asked, and send post-call notifications.",
+      "reason": "confirmed during onboarding call"
+    },
+    {
+      "field": "non_emergency_routing_rules.collect_fields",
       "old_value": [
-        "generator installations",
-        "that service and recommend they call someone else"
+        "Customer Name",
+        "Address where work will be done",
+        "Best phone number to reach customer",
+        "Preferred date/time for assessment/service",
+        "Nature of the electrical problem/service request",
+        "Electrical requirements for specific models (e.g., hot tub, EV charger)",
+        "Setup details (e.g., hot tub location, distance, circuit requirements)"
       ],
       "new_value": [
-        "generator installations",
-        "that service and recommend they call someone else",
-        "generators — politely decline those"
+        "appointment details",
+        "quote request details",
+        "reason for calling"
       ],
-      "reason": "Service exclusions updated during onboarding"
+      "reason": "confirmed during onboarding call"
     },
     {
-      "field": "custom_greeting",
-      "old_value": "(not set)",
-      "new_value": "Thank you for calling Ben",
-      "reason": "Custom greeting specified during onboarding"
+      "field": "service_fees",
+      "old_value": {},
+      "new_value": {
+        "service_call_fee": "$115",
+        "hourly_rate": "$98",
+        "half_hour_rate": "$49"
+      },
+      "reason": "Pricing details captured during onboarding"
     },
     {
-      "field": "non_emergency_collection_fields",
-      "old_value": [
-        "name and callback number",
-        "information for?",
-        "they need"
-      ],
-      "new_value": [
-        "name and callback number",
-        "information for?",
-        "they need",
-        "name"
-      ],
-      "reason": "Additional data collection fields added during onboarding"
+      "field": "notes",
+      "old_value": "Company is currently a sole proprietorship, plans to incorporate this year. Client contact is Ben Penoyer, with plans to transition some responsibilities to Greg (Operations Manager/Estimator). Ben uses Jobber for CRM and QuickBooks for accounting, with invoicing primarily through Jobber. Ben previously tried a virtual assistant (live person) which was not a good fit. Clara AI offers a field copilot solution, which was not pursued further during this call. Clara AI's booking feature for field technician appointments was rolled back due to unpredictable job durations; however, it can confirm site visits or specific pre-defined appointments. Clara AI will not have its own calendar/scheduler. Clara AI will provide a new phone number for call forwarding or can integrate with existing numbers for screening. Pricing is $249/month for 500 minutes (excluding sales filtration calls). Client is interested in a 3-month plan, with the current price locked for 12 months if they continue after the initial 3 months. A kickoff call is scheduled for January 9, 2026, at noon (30 minutes).",
+      "new_value": "Ben currently uses an Android device for his main business line. He is in the process of setting up a second phone number for personal use, which Clara will use for transferring calls to him. The initial setup involves conditional call forwarding from Ben's main line to Clara (if calls are unanswered or declined). Once the second number is active, Clara will become the primary call answerer. Testing of the Clara agent is scheduled for today, with a follow-up review call planned for Friday at 2:00 PM.",
+      "reason": "confirmed during onboarding call"
     }
   ]
 }

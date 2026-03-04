@@ -38,23 +38,28 @@ async function init() {
  * Load account data by fetching JSON files from the outputs directory.
  */
 async function loadAccountsFromFetch() {
-    // List of known account IDs (could be dynamic with a manifest file)
-    const accountIds = [
-        'bens_electric_solutions',
-        'prestige_fire_protection',
-        'comfort_zone_hvac',
-        'guardian_alarm_systems',
-        'allstar_plumbing_mechanical',
-    ];
+    const accountIds = ['bens_electric_solutions'];
 
     for (const id of accountIds) {
         try {
-            const v1Memo = await fetchJSON(`../outputs/accounts/${id}/v1/account_memo.json`);
-            const v2Memo = await fetchJSON(`../outputs/accounts/${id}/v2/account_memo.json`);
-            const v1Spec = await fetchJSON(`../outputs/accounts/${id}/v1/agent_spec.json`);
-            const v2Spec = await fetchJSON(`../outputs/accounts/${id}/v2/agent_spec.json`);
-            const changes = await fetchJSON(`../outputs/accounts/${id}/changes.json`);
-            const changelog = await fetchText(`../outputs/accounts/${id}/changelog.md`);
+            // Try ../outputs/ (if served from dashboard/) or outputs/ (if served from root)
+            let v1Memo, v2Memo, v1Spec, v2Spec, changes, changelog;
+
+            async function tryFetch(basePath) {
+                v1Memo = await fetchJSON(`${basePath}accounts/${id}/v1/account_memo.json`);
+                v2Memo = await fetchJSON(`${basePath}accounts/${id}/v2/account_memo.json`);
+                v1Spec = await fetchJSON(`${basePath}accounts/${id}/v1/agent_spec.json`);
+                v2Spec = await fetchJSON(`${basePath}accounts/${id}/v2/agent_spec.json`);
+                changes = await fetchJSON(`${basePath}accounts/${id}/changes.json`);
+                changelog = await fetchText(`${basePath}accounts/${id}/changelog.md`);
+            }
+
+            try {
+                await tryFetch('../outputs/');
+            } catch (e1) {
+                console.log('Trying root outputs path...');
+                await tryFetch('outputs/');
+            }
 
             accountsData[id] = {
                 id,
@@ -103,22 +108,18 @@ function loadEmbeddedData() {
 // ============================================================================
 
 function populateAccountSelector() {
-    const select = document.getElementById('account-select');
-    select.innerHTML = '<option value="">-- Choose an account --</option>';
+    // Automatically select the single real account
+    currentAccount = accountsData['bens_electric_solutions'] || null;
+    if (currentAccount) {
+        // Switch to v1 tab automatically instead of overview since there's no selector
+        const overviewTab = document.querySelector('.tab[data-tab="overview"]');
+        const v1Tab = document.querySelector('.tab[data-tab="v1"]');
+        if (overviewTab) overviewTab.classList.remove('active');
+        if (v1Tab) v1Tab.classList.add('active');
 
-    for (const [id, data] of Object.entries(accountsData)) {
-        const opt = document.createElement('option');
-        opt.value = id;
-        opt.textContent = `${data.company_name} (${id})`;
-        select.appendChild(opt);
+        showPanel('v1');
+        renderCurrentTab();
     }
-
-    select.addEventListener('change', (e) => {
-        currentAccount = accountsData[e.target.value] || null;
-        if (currentAccount) {
-            renderCurrentTab();
-        }
-    });
 }
 
 function setupTabs() {
@@ -263,7 +264,7 @@ function showAgentSpec() {
     el.innerHTML = spec ? syntaxHighlight(JSON.stringify(spec, null, 2)) : '<span style="color:var(--text-muted)">No agent spec available</span>';
 }
 
-window.showAgentVersion = function(version) {
+window.showAgentVersion = function (version) {
     currentAgentVersion = version;
     document.getElementById('agent-v1-btn').classList.toggle('active', version === 'v1');
     document.getElementById('agent-v2-btn').classList.toggle('active', version === 'v2');

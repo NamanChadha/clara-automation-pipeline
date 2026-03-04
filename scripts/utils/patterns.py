@@ -21,7 +21,7 @@ TIME_PATTERN = re.compile(
 HOURS_RANGE_PATTERN = re.compile(
     r'(\d{1,2})\s*(?::(\d{2}))?\s*(AM|PM|am|pm|a\.m\.|p\.m\.)?'
     r'\s*(?:to|through|-|–|until)\s*'
-    r'(\d{1,2})\s*(?::(\d{2}))?\s*(AM|PM|am|pm|a\.m\.|p\.m\.)',
+    r'(\d{1,2})\s*(?::(\d{2}))?\s*(AM|PM|am|pm|a\.m\.|p\.m\.)?',
     re.IGNORECASE
 )
 
@@ -226,9 +226,22 @@ def extract_hours_range(text: str) -> Optional[Dict]:
     match = HOURS_RANGE_PATTERN.search(text)
     if match:
         start_h, start_m, start_ap, end_h, end_m, end_ap = match.groups()
-        # If start has no AM/PM, infer from context
+        # Inference logic
+        if not end_ap:
+            if start_ap:
+                end_ap = start_ap
+            else:
+                # Common pattern: 8 to 5 -> 8 AM to 5 PM
+                h_start = int(start_h)
+                h_end = int(end_h)
+                if h_start >= 7 and h_start < 12 and h_end >= 1 and h_end <= 7:
+                    start_ap = 'AM'
+                    end_ap = 'PM'
+                else:
+                    start_ap = 'AM'
+                    end_ap = 'PM' # Default to AM/PM for business
         if not start_ap:
-            start_ap = 'AM'  # default assumption for start times
+            start_ap = 'AM'
         return {
             'start': normalize_time(start_h, start_m, start_ap),
             'end': normalize_time(end_h, end_m, end_ap),
@@ -282,9 +295,10 @@ def find_excluded_services(text: str) -> List[str]:
     excluded = []
     for match in DO_NOT_DO_PATTERN.finditer(text):
         service = match.group(1).strip()
-        if len(service) < 80:  # reasonable length
+        # Filter out noise like "that", "anything", "anymore"
+        if len(service) > 4 and len(service) < 80 and not any(noise in service.lower() for noise in ['that', 'anything', 'anymore', 'the entire', 'itself']):
             excluded.append(service)
-    return excluded
+    return list(set(excluded))
 
 
 def extract_timeout(text: str) -> Optional[int]:

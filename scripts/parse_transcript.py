@@ -101,20 +101,49 @@ def parse_transcript(filepath: str) -> Dict:
 
     # Parse speaker turns
     turns = []
-    for match in TURN_PATTERN.finditer(content):
-        timestamp = match.group(1)
-        speaker = match.group(2).strip()
-        text = match.group(3).strip()
+    
+    old_matches = list(TURN_PATTERN.finditer(content))
+    if old_matches:
+        for match in old_matches:
+            timestamp = match.group(1)
+            speaker = match.group(2).strip()
+            text = match.group(3).strip()
 
-        # Skip demo playback markers
-        if STAGE_MARKER_PATTERN.match(text):
-            continue
+            if STAGE_MARKER_PATTERN.match(text):
+                continue
 
-        turns.append({
-            'timestamp': timestamp,
-            'speaker': speaker,
-            'text': text,
-        })
+            turns.append({
+                'timestamp': timestamp,
+                'speaker': speaker,
+                'text': text,
+            })
+    else:
+        # Format: Speaker: 00:00 \n Text
+        NEW_TURN_PATTERN = re.compile(r'^([^\n:]+?):\s*(\d{2}:\d{2}(?::\d{2})?)\s*\n(.*?)(?=^[^\n:]+?:\s*\d{2}:\d{2}|\Z)', re.MULTILINE | re.DOTALL)
+        new_matches = list(NEW_TURN_PATTERN.finditer(content))
+        if new_matches:
+            for match in new_matches:
+                speaker = match.group(1).strip()
+                timestamp = match.group(2).strip()
+                text = match.group(3).strip()
+                
+                if STAGE_MARKER_PATTERN.match(text):
+                    continue
+
+                turns.append({
+                    'timestamp': timestamp,
+                    'speaker': speaker,
+                    'text': text,
+                })
+        else:
+            # Fallback for raw text (Whisper output without labels)
+            clean_content = re.sub(STAGE_MARKER_PATTERN, '', content).strip()
+            if clean_content:
+                turns.append({
+                    'timestamp': '00:00:00',
+                    'speaker': 'Unknown',
+                    'text': clean_content,
+                })
 
     result['turns'] = turns
 
@@ -129,7 +158,18 @@ def parse_transcript(filepath: str) -> Dict:
     result['client_text'] = '\n'.join(t['text'] for t in client_turns)
     result['clara_text'] = '\n'.join(t['text'] for t in clara_turns)
 
-    # Generate account_id from company name
+    # If no client/clara text but we have full text, treat full text as client text for extraction
+    if not result['client_text'] and result['full_text']:
+        result['client_text'] = result['full_text']
+
+    # Generate account_id from company name or filename
+    if not result['company_name']:
+        # Infer from filename: real_bens_electric_demo.txt -> Ben's Electric
+        base = os.path.basename(filepath).lower()
+        base = re.sub(r'_(demo|onboarding)\.txt$', '', base)
+        base = base.replace('_', ' ').title()
+        result['company_name'] = base
+
     if result['company_name']:
         result['account_id'] = slugify(result['company_name'])
 

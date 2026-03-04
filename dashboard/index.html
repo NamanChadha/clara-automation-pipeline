@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clara Automation Pipeline - Dashboard</title>
-    <meta name="description" content="Clara Automation Pipeline dashboard for viewing account data, agent configurations, and version diffs">
+    <meta name="description"
+        content="Clara Automation Pipeline dashboard for viewing account data, agent configurations, and version diffs">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app">
         <!-- Header -->
@@ -27,12 +30,11 @@
             </div>
         </header>
 
-        <!-- Account Selector -->
+        <!-- Account Selector (Removed select dropdown, replaced with static label) -->
         <div class="selector-bar">
-            <label for="account-select">Select Account:</label>
-            <select id="account-select">
-                <option value="">-- Choose an account --</option>
-            </select>
+            <label>Current Account:</label>
+            <strong id="account-name-display" style="font-size: 1.1rem; margin-right: auto; padding-left: 10px;">Ben's
+                Electric Solutions</strong>
             <div class="version-tabs">
                 <button class="tab active" data-tab="overview">Overview</button>
                 <button class="tab" data-tab="v1">v1 (Demo)</button>
@@ -112,4 +114,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>

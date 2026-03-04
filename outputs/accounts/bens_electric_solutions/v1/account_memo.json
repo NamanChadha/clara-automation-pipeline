@@ -1,11 +1,13 @@
 {
   "account_id": "bens_electric_solutions",
   "company_name": "Ben's Electric Solutions",
+  "contact_name": "Ben Penoyer",
+  "contact_email": "Ben@Benselectricsolutionsteam.com",
   "business_hours": {
     "regular": {
-      "days": "Monday-Friday",
-      "start": "7:00 AM",
-      "end": "5:00 PM"
+      "days": [],
+      "start": null,
+      "end": null
     },
     "saturday": {},
     "sunday": {},
@@ -13,64 +15,76 @@
     "seasonal_adjustments": [],
     "holidays": []
   },
-  "office_address": "4521 West Kennedy Boulevard, Tampa, FL 33609",
+  "office_address": "",
   "services_supported": [
-    "electrical work",
-    "lighting",
-    "rewiring",
-    "panel upgrade",
-    "wiring",
-    "ac"
+    "Outlet replacements",
+    "Aluminum wiring mitigation",
+    "Service calls",
+    "Small jobs",
+    "Odd jobs",
+    "Renovations",
+    "Troubleshooting",
+    "New custom home projects",
+    "Tenant infill projects",
+    "Tenant improvement projects",
+    "EV chargers",
+    "Hot tub hookups (electrical installation)",
+    "Panel changes",
+    "Service maintenance",
+    "Plumbing and gas line connections (for hot tubs)",
+    "Generator connection and installation (for hot tubs)",
+    "LED upgrades"
   ],
+  "service_fees": {},
   "emergency_definition": [
-    "Exposed live wiring",
-    "Sparking panels",
-    "Complete power loss at a commercial property",
-    "Any situation where there's a fire risk from electrical issues"
+    "Gas station pumps go down",
+    "Sparks coming out of certain circuit boards",
+    "No electricity"
   ],
   "emergency_routing_rules": {
-    "chain": [
-      {
-        "role": "Backup Technician",
-        "phone": "813-555-0142",
-        "timeout_seconds": 60
-      },
-      {
-        "role": "Backup Technician",
-        "phone": "813-555-0198",
-        "timeout_seconds": 60
-      },
-      {
-        "role": "Backup Technician",
-        "phone": "813-555-0101",
-        "timeout_seconds": 60
-      }
+    "chain": [],
+    "order": [
+      "primary_contact"
     ]
   },
   "non_emergency_routing_rules": {
-    "callback_timeframe": "within 30 minutes"
+    "action": "Clara AI acts as a receptionist, screens calls, qualifies jobs, gathers customer and job details, filters out irrelevant calls (e.g., sales calls), aims to book meetings/assessments, sends email and text notifications with call summaries, recordings, and transcripts. It can escalate/route calls to specific departments or team members based on intent, and directly transfer specific calls (e.g., from family, preferred customers) to Ben without screening. Ben currently assigns calls from the dashboard to team members.",
+    "collect_fields": [
+      "Customer Name",
+      "Address where work will be done",
+      "Best phone number to reach customer",
+      "Preferred date/time for assessment/service",
+      "Nature of the electrical problem/service request",
+      "Electrical requirements for specific models (e.g., hot tub, EV charger)",
+      "Setup details (e.g., hot tub location, distance, circuit requirements)"
+    ]
   },
   "call_transfer_rules": {},
   "integration_constraints": [
-    "For non-emergency stuff, Clara can create the service request in ServiceTrade. But for emergency calls, don't create anything — just route the call and let the technician handle the paperwork after. Oh and one more thing — we do NOT do generator installations. If someone calls about generators, just let them know we don't offer that service and recommend they call someone else."
+    "Jobber: Integration is in process/coming soon (for CRM and invoicing)",
+    "QuickBooks: Used for accounting, Clara can integrate into accounting systems",
+    "Service Titan: Integrated",
+    "Housecall Pro: Integrated",
+    "Service Fusion: Integrated",
+    "Zen platform: Integrated"
   ],
-  "after_hours_flow_summary": "After hours: Greet caller, note office is closed, determine purpose, check if emergency. If emergency: collect name, number, address, attempt routing via escalation chain. If non-emergency: collect details, confirm next-business-day callback.",
-  "office_hours_flow_summary": "Business hours: Greet caller, determine purpose, check if emergency. If emergency: collect critical info and route immediately. If routine: collect name and number, transfer to office. If transfer fails: take message, confirm callback timeframe.",
+  "after_hours_flow_summary": "Clara AI takes calls, can book jobs for the next business day (e.g., after 8 AM). If Ben is unavailable, the system can pivot to backup workflows (e.g., schedule for tomorrow after 8 AM, route to team member, route to someone on call). Emergency calls are automatically routed to Ben.",
+  "office_hours_flow_summary": "Clara AI acts as a receptionist, taking calls 24/7. It screens calls, qualifies jobs, gathers customer and job details. It filters out irrelevant calls (e.g., sales calls). It aims to book meetings/assessments. It sends email and text notifications with call summaries and recordings/transcripts. It can escalate/route calls to specific departments (e.g., accounting) or team members based on the call's intent. It can directly transfer specific calls (e.g., from family, preferred customers) to Ben without screening. It can upsell club memberships during conversations. Ben currently assigns calls from the dashboard to team members, with future automation planned.",
   "excluded_services": [
-    "generator installations",
-    "that service and recommend they call someone else"
+    "pool installation",
+    "full hot tub installation",
+    "but would be interested"
   ],
   "custom_greeting": null,
-  "non_emergency_collection_fields": [
-    "name and callback number",
-    "information for?",
-    "they need"
+  "notes": "Company is currently a sole proprietorship, plans to incorporate this year. Client contact is Ben Penoyer, with plans to transition some responsibilities to Greg (Operations Manager/Estimator). Ben uses Jobber for CRM and QuickBooks for accounting, with invoicing primarily through Jobber. Ben previously tried a virtual assistant (live person) which was not a good fit. Clara AI offers a field copilot solution, which was not pursued further during this call. Clara AI's booking feature for field technician appointments was rolled back due to unpredictable job durations; however, it can confirm site visits or specific pre-defined appointments. Clara AI will not have its own calendar/scheduler. Clara AI will provide a new phone number for call forwarding or can integrate with existing numbers for screening. Pricing is $249/month for 500 minutes (excluding sales filtration calls). Client is interested in a 3-month plan, with the current price locked for 12 months if they continue after the initial 3 months. A kickoff call is scheduled for January 9, 2026, at noon (30 minutes).",
+  "questions_or_unknowns": [
+    "Business hours start time not confirmed",
+    "Office address not provided",
+    "Emergency routing chain not specified"
   ],
-  "questions_or_unknowns": [],
-  "notes": "Extracted from demo call — details may be preliminary and subject to change during onboarding.",
   "_metadata": {
     "version": "v1",
-    "created_at": "2026-03-04T10:50:36.583500Z",
+    "created_at": "2026-03-04T14:23:05.303896Z",
     "account_id": "bens_electric_solutions"
   }
 }

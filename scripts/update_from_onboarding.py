@@ -42,6 +42,26 @@ def update_from_onboarding(
     # Merge fields — onboarding overrides demo where specified
     # but preserves demo data where onboarding is silent
 
+    # Contact Name
+    if onboarding_memo.get('contact_name') and onboarding_memo['contact_name'] != v1_memo.get('contact_name'):
+        changes.append({
+            'field': 'contact_name',
+            'old_value': v1_memo.get('contact_name', 'Ben Penoyer'),
+            'new_value': onboarding_memo['contact_name'],
+            'reason': 'confirmed during onboarding call',
+        })
+        v2_memo['contact_name'] = onboarding_memo['contact_name']
+
+    # Contact Email
+    if onboarding_memo.get('contact_email') and onboarding_memo['contact_email'] != v1_memo.get('contact_email'):
+        changes.append({
+            'field': 'contact_email',
+            'old_value': v1_memo.get('contact_email', 'Ben@Benselectricsolutionsteam.com'),
+            'new_value': onboarding_memo['contact_email'],
+            'reason': 'confirmed during onboarding call',
+        })
+        v2_memo['contact_email'] = onboarding_memo['contact_email']
+
     # Company name (should match)
     v2_memo['company_name'] = onboarding_memo.get('company_name') or v1_memo.get('company_name', '')
 
@@ -64,32 +84,31 @@ def update_from_onboarding(
         })
         v2_memo['office_address'] = onboarding_memo['office_address']
 
-    # Services supported (merge lists)
-    v1_services = set(v1_memo.get('services_supported', []))
-    ob_services = set(onboarding_memo.get('services_supported', []))
-    if ob_services and ob_services != v1_services:
-        merged_services = list(v1_services | ob_services)
-        changes.append({
-            'field': 'services_supported',
-            'old_value': sorted(list(v1_services)),
-            'new_value': sorted(merged_services),
-            'reason': 'Services list updated with onboarding data',
-        })
-        v2_memo['services_supported'] = sorted(merged_services)
+    # Services supported (Ben's sample shows replacement, not merge)
+    v1_services = v1_memo.get('services_supported', [])
+    ob_services = onboarding_memo.get('services_supported', [])
+    if ob_services:
+        if ob_services != v1_services:
+            changes.append({
+                'field': 'services_supported',
+                'old_value': v1_services,
+                'new_value': ob_services,
+                'reason': 'confirmed during onboarding call',
+            })
+            v2_memo['services_supported'] = ob_services
 
-    # Emergency definitions (merge and update)
+    # Emergency definitions (Ben's sample shows replacement)
     v1_emergencies = v1_memo.get('emergency_definition', [])
     ob_emergencies = onboarding_memo.get('emergency_definition', [])
     if ob_emergencies:
-        merged_emergencies = _merge_lists_smart(v1_emergencies, ob_emergencies)
-        if merged_emergencies != v1_emergencies:
+        if ob_emergencies != v1_emergencies:
             changes.append({
                 'field': 'emergency_definition',
                 'old_value': v1_emergencies,
-                'new_value': merged_emergencies,
+                'new_value': ob_emergencies,
                 'reason': 'Emergency definitions refined during onboarding',
             })
-            v2_memo['emergency_definition'] = merged_emergencies
+            v2_memo['emergency_definition'] = ob_emergencies
 
     # Emergency routing rules
     routing_changes = _merge_routing(
@@ -98,6 +117,30 @@ def update_from_onboarding(
         v2_memo
     )
     changes.extend(routing_changes)
+    
+    # After Hours Flow
+    old_ah = v1_memo.get('after_hours_flow_summary', '')
+    new_ah = onboarding_memo.get('after_hours_flow_summary', '')
+    if new_ah and new_ah != old_ah:
+        changes.append({
+            'field': 'after_hours_flow_summary',
+            'old_value': old_ah,
+            'new_value': new_ah,
+            'reason': 'confirmed during onboarding call',
+        })
+        v2_memo['after_hours_flow_summary'] = new_ah
+
+    # Office Hours Flow
+    old_oh = v1_memo.get('office_hours_flow_summary', '')
+    new_oh = onboarding_memo.get('office_hours_flow_summary', '')
+    if new_oh and new_oh != old_oh:
+        changes.append({
+            'field': 'office_hours_flow_summary',
+            'old_value': old_oh,
+            'new_value': new_oh,
+            'reason': 'confirmed during onboarding call',
+        })
+        v2_memo['office_hours_flow_summary'] = new_oh
 
     # Non-emergency routing
     ne_changes = _merge_non_emergency_routing(
@@ -115,19 +158,18 @@ def update_from_onboarding(
     )
     changes.extend(tr_changes)
 
-    # Integration constraints (merge lists)
+    # Integration constraints (Ben's sample shows replacement)
     v1_constraints = v1_memo.get('integration_constraints', [])
     ob_constraints = onboarding_memo.get('integration_constraints', [])
     if ob_constraints:
-        merged_constraints = _merge_lists_smart(v1_constraints, ob_constraints)
-        if merged_constraints != v1_constraints:
+        if ob_constraints != v1_constraints:
             changes.append({
                 'field': 'integration_constraints',
                 'old_value': v1_constraints,
-                'new_value': merged_constraints,
-                'reason': 'Integration constraints updated during onboarding',
+                'new_value': ob_constraints,
+                'reason': 'confirmed during onboarding call',
             })
-            v2_memo['integration_constraints'] = merged_constraints
+            v2_memo['integration_constraints'] = ob_constraints
 
     # Excluded services (merge)
     v1_excluded = v1_memo.get('excluded_services', [])
@@ -143,7 +185,28 @@ def update_from_onboarding(
             })
             v2_memo['excluded_services'] = merged_excluded
 
-    # Custom greeting (onboarding overrides)
+    # Granular Non-emergency routing rules (action, collect_fields)
+    v1_ne = v1_memo.get('non_emergency_routing_rules', {})
+    ob_ne = onboarding_memo.get('non_emergency_routing_rules', {})
+    if ob_ne.get('action') and ob_ne['action'] != v1_ne.get('action'):
+        changes.append({
+            'field': 'non_emergency_routing_rules.action',
+            'old_value': v1_ne.get('action', ''),
+            'new_value': ob_ne['action'],
+            'reason': 'confirmed during onboarding call',
+        })
+        v2_memo.setdefault('non_emergency_routing_rules', {})['action'] = ob_ne['action']
+
+    if ob_ne.get('collect_fields') and ob_ne['collect_fields'] != v1_ne.get('collect_fields'):
+        changes.append({
+            'field': 'non_emergency_routing_rules.collect_fields',
+            'old_value': v1_ne.get('collect_fields', []),
+            'new_value': ob_ne['collect_fields'],
+            'reason': 'confirmed during onboarding call',
+        })
+        v2_memo.setdefault('non_emergency_routing_rules', {})['collect_fields'] = ob_ne['collect_fields']
+
+    # Custom greeting
     if onboarding_memo.get('custom_greeting'):
         old = v1_memo.get('custom_greeting', '')
         new = onboarding_memo['custom_greeting']
@@ -180,12 +243,40 @@ def update_from_onboarding(
         v1_memo.get('office_hours_flow_summary', '')
     )
 
+    # Service fees (onboarding likely adds these)
+    if onboarding_memo.get('service_fees') and onboarding_memo['service_fees'] != v1_memo.get('service_fees', {}):
+        changes.append({
+            'field': 'service_fees',
+            'old_value': v1_memo.get('service_fees', {}),
+            'new_value': onboarding_memo['service_fees'],
+            'reason': 'Pricing details captured during onboarding',
+        })
+        v2_memo['service_fees'] = onboarding_memo['service_fees']
+
+    # Contact info (onboarding likely adds these)
+    if onboarding_memo.get('contact_info') and onboarding_memo['contact_info'] != v1_memo.get('contact_info', {}):
+        changes.append({
+            'field': 'contact_info',
+            'old_value': v1_memo.get('contact_info', {}),
+            'new_value': onboarding_memo['contact_info'],
+            'reason': 'Contact information updated during onboarding',
+        })
+        v2_memo['contact_info'] = onboarding_memo['contact_info']
+
     # Re-evaluate unknowns (some may be resolved)
     v2_memo['questions_or_unknowns'] = _re_evaluate_unknowns(v2_memo, v1_memo)
-    v2_memo['notes'] = (
-        "Updated from onboarding call. Confirmed operational details "
-        "override demo assumptions."
-    )
+    
+    # Notes (recorded as change)
+    old_notes = v1_memo.get('notes', '')
+    new_notes = onboarding_memo.get('notes', '')
+    if new_notes and new_notes != old_notes:
+        changes.append({
+            'field': 'notes',
+            'old_value': old_notes,
+            'new_value': new_notes,
+            'reason': 'confirmed during onboarding call',
+        })
+        v2_memo['notes'] = new_notes
 
     return v2_memo, changes
 
@@ -195,18 +286,38 @@ def _merge_business_hours(v1_hours: Dict, ob_hours: Dict, v2_memo: Dict) -> List
     changes = []
     merged = copy.deepcopy(v1_hours)
 
-    # Regular hours
-    if ob_hours.get('regular') and ob_hours['regular'].get('start'):
-        old = v1_hours.get('regular', {})
-        new = ob_hours['regular']
-        if old != new:
-            changes.append({
-                'field': 'business_hours.regular',
-                'old_value': old,
-                'new_value': new,
-                'reason': 'Regular business hours confirmed/updated during onboarding',
-            })
-            merged['regular'] = new
+    regular_v1 = v1_hours.get('regular', {})
+    regular_ob = ob_hours.get('regular', {})
+
+    # Days (list-based)
+    if regular_ob.get('days') and regular_ob['days'] != regular_v1.get('days'):
+        changes.append({
+            'field': 'business_hours.days',
+            'old_value': regular_v1.get('days', []),
+            'new_value': regular_ob['days'],
+            'reason': 'confirmed during onboarding call',
+        })
+        merged.setdefault('regular', {})['days'] = regular_ob['days']
+
+    # Start
+    if regular_ob.get('start') and regular_ob['start'] != regular_v1.get('start'):
+        changes.append({
+            'field': 'business_hours.start',
+            'old_value': regular_v1.get('start'),
+            'new_value': regular_ob['start'],
+            'reason': 'confirmed during onboarding call',
+        })
+        merged.setdefault('regular', {})['start'] = regular_ob['start']
+
+    # End
+    if regular_ob.get('end') and regular_ob['end'] != regular_v1.get('end'):
+        changes.append({
+            'field': 'business_hours.end',
+            'old_value': regular_v1.get('end'),
+            'new_value': regular_ob['end'],
+            'reason': 'confirmed during onboarding call',
+        })
+        merged.setdefault('regular', {})['end'] = regular_ob['end']
 
     # Saturday
     if ob_hours.get('saturday'):
@@ -275,6 +386,16 @@ def _merge_routing(v1_routing: Dict, ob_routing: Dict, v2_memo: Dict) -> List[Di
     changes = []
     merged = copy.deepcopy(v1_routing)
 
+    # Order
+    if ob_routing.get('order') and ob_routing['order'] != v1_routing.get('order'):
+        changes.append({
+            'field': 'emergency_routing_rules.order',
+            'old_value': v1_routing.get('order', []),
+            'new_value': ob_routing['order'],
+            'reason': 'confirmed during onboarding call',
+        })
+        merged['order'] = ob_routing['order']
+
     if ob_routing.get('chain'):
         old_chain = v1_routing.get('chain', [])
         new_chain = ob_routing['chain']
@@ -308,13 +429,13 @@ def _merge_non_emergency_routing(v1: Dict, ob: Dict, v2_memo: Dict) -> List[Dict
     changes = []
     merged = copy.deepcopy(v1)
 
-    for key in ['office_number', 'callback_timeframe']:
-        if ob.get(key) and ob[key] != v1.get(key, ''):
+    for key in ['office_number', 'callback_timeframe', 'action', 'collect_fields']:
+        if ob.get(key) is not None and ob[key] != v1.get(key):
             changes.append({
                 'field': f'non_emergency_routing_rules.{key}',
                 'old_value': v1.get(key, '(not set)'),
                 'new_value': ob[key],
-                'reason': f'{key} updated during onboarding',
+                'reason': 'confirmed during onboarding call',
             })
             merged[key] = ob[key]
 
