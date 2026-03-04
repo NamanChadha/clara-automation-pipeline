@@ -1,122 +1,77 @@
-# n8n Setup Guide — Clara Automation Pipeline
+# 🚀 n8n Setup & Operations Guide
 
-This guide walks you through setting up and running the n8n workflow automation layer.
+This guide covers how to set up, configure, and batch-run the Clara Automation Pipeline using n8n and Docker.
 
-## Prerequisites
+## 🐳 1. Docker Setup (Recommended)
 
-- Docker and Docker Compose installed
-- Pipeline Python scripts working (test with `python scripts/run_pipeline.py --pipeline all` first)
+The easiest way to run the pipeline is via Docker Compose. This starts both the n8n environment and the Python automation container.
 
----
-
-## Step 1: Start n8n
-
+### Step 1: Start the services
 ```bash
-docker-compose up n8n -d
+docker-compose up -d
 ```
 
-Wait 10-15 seconds for n8n to initialize, then open: **http://localhost:5678**
-
-Login credentials (from `.env`):
-- **Username**: `admin`
-- **Password**: `changeme`
+### Step 2: Access n8n
+Open your browser and navigate to:
+**URL**: `http://localhost:5678`
 
 ---
 
-## Step 2: Import Workflows
+## 🔑 2. Environment Variables
 
-1. In the n8n dashboard, click **"+ Add Workflow"**
-2. Click the **"..."** menu (top right) → **Import from File**
-3. Select `workflows/pipeline_a_demo_to_agent.json`
-4. Click **Save**
-5. Repeat for `workflows/pipeline_b_onboarding_update.json`
+Create a `.env` file in the root directory (use `.env.example` as a template):
 
----
-
-## Step 3: Activate Workflows
-
-1. Open each workflow
-2. Toggle the **Active** switch to ON
-3. The webhook URLs will be displayed in the Webhook node
+| Variable | Description | Default |
+| :--- | :--- | :--- |
+| `N8N_BASIC_AUTH_USER` | Admin username for n8n | `admin` |
+| `N8N_BASIC_AUTH_PASSWORD` | Admin password for n8n | `changeme` |
+| `PYTHONPATH` | Python path for internal scripts | `/app` |
+| `DATA_DIR` | Directory for transcripts | `./data` |
+| `OUTPUT_DIR` | Directory for generated results | `./outputs` |
 
 ---
 
-## Step 4: Trigger Pipeline A (Demo → v1)
+## 📥 3. Workflow Import Steps
 
-Send a POST request to the Pipeline A webhook:
+To import the automation workflows into n8n:
 
+1.  Open the n8n UI at `http://localhost:5678`.
+2.  Navigate to **Workflows** in the left sidebar.
+3.  Click **Add Workflow** > **Import from File**.
+4.  Upload the JSON files from the `/workflows` directory:
+    *   `pipeline_a_demo_to_agent.json` (Demo Pipeline)
+    *   `pipeline_b_onboarding_update.json` (Onboarding Pipeline)
+5.  Click **Save** and ensure the workflows are **Active**.
+
+---
+
+## 🔄 4. "Run All Dataset" (Batch Processing)
+
+If you need to process all transcripts at once (e.g., during initialization), use the built-in batch runner.
+
+### Method A: Via Docker (Preferred)
+Run the following command to process the entire `data/transcripts` directory:
 ```bash
-curl -X POST http://localhost:5678/webhook/pipeline-a \
-  -H "Content-Type: application/json" \
-  -d '{"transcript_path": "/data/data/transcripts/demo/bens_electric_demo.txt"}'
-```
-
-Expected response:
-```json
-{
-  "account_id": "bens_electric_solutions",
-  "company_name": "Ben's Electric Solutions",
-  "memo_path": "outputs/accounts/bens_electric_solutions/v1/account_memo.json",
-  "spec_path": "outputs/accounts/bens_electric_solutions/v1/agent_spec.json",
-  "status": "success",
-  "pipeline": "A",
-  "version": "v1"
-}
-```
-
----
-
-## Step 5: Trigger Pipeline B (Onboarding → v2)
-
-```bash
-curl -X POST http://localhost:5678/webhook/pipeline-b \
-  -H "Content-Type: application/json" \
-  -d '{"transcript_path": "/data/data/transcripts/onboarding/bens_electric_onboarding.txt"}'
-```
-
-Expected response:
-```json
-{
-  "account_id": "bens_electric_solutions",
-  "company_name": "Ben's Electric Solutions",
-  "memo_path": "outputs/accounts/bens_electric_solutions/v2/account_memo.json",
-  "spec_path": "outputs/accounts/bens_electric_solutions/v2/agent_spec.json",
-  "changelog_path": "outputs/accounts/bens_electric_solutions/changelog.md",
-  "total_changes": 13,
-  "status": "success"
-}
-```
-
----
-
-## Step 6: Batch Processing
-
-To process all transcripts, you can use the CLI runner directly:
-
-```bash
-# Inside Docker
 docker-compose run pipeline python scripts/run_pipeline.py --pipeline all
+```
 
-# Or locally
+### Method B: Via Local Python
+If you are running outside of Docker:
+```bash
 python scripts/run_pipeline.py --pipeline all
 ```
 
----
-
-## Architecture Notes
-
-- **n8n** acts as the orchestration layer, calling Python scripts via `executeCommand` nodes
-- The Python scripts are mounted into n8n's container at `/data/`
-- Outputs are written to the shared `outputs/` volume
-- Both workflows use webhook triggers so they can be called from external systems (Fireflies, Zapier, etc.)
+### What it does:
+- Scans `data/transcripts/demo/` and `data/transcripts/onboarding/`.
+- Pairs transcript files by account name.
+- Generates `v1` (Demo), `v2` (Onboarding), and a `changelog.md` for every account in `outputs/accounts/`.
 
 ---
 
-## Troubleshooting
+## 📂 5. Folder Mappings (Inside Docker)
 
-| Issue | Fix |
-|-------|-----|
-| n8n won't start | Check Docker is running: `docker ps` |
-| Webhook not responding | Ensure workflow is activated (toggle ON) |
-| Python command fails | Check `/data/scripts/` path inside container |
-| Permission denied | Ensure volume mounts have correct permissions |
+If you are modifying scripts or workflows, keep these mappings in mind:
+- `/data/transcripts` ➔ `./data`
+- `/data/outputs" ➔ `./outputs`
+- `/data/scripts` ➔ `./scripts`
+- `/data/workflows` ➔ `./workflows`

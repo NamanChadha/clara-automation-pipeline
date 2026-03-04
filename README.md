@@ -21,7 +21,10 @@ This pipeline solves the "Operational Gap" between sales demos and production de
 
 ## 🛠️ How to Run
 
-### Prerequisite: Install Dependencies
+### Prerequisite: Setup n8n & Dependencies
+
+1. **n8n & Docker**: Follow the [n8n Setup Guide](docs/n8n_setup_guide.md) for full containerized deployment and environment configuration.
+2. **Local Dependencies**:
 ```powershell
 pip install -r requirements.txt
 ```
