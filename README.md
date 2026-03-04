@@ -18,7 +18,6 @@ This pipeline solves the "Operational Gap" between sales demos and production de
   - `accounts/<id>/v1/`: Preliminary configuration.
   - `accounts/<id>/v2/`: Confirmed production configuration.
   - `accounts/<id>/changelog.md`: Human-readable version diff.
-- `dashboard/`: A local UI for visualizing the version transitions.
 
 ## 🛠️ How to Run
 
@@ -34,10 +33,10 @@ python scripts/run_pipeline.py --pipeline all
 ```
 
 ### View Results
-Open the local dashboard to see the high-fidelity diffs:
+Check the versioned outputs directly in the file system:
 ```powershell
 # Open outputs/accounts/bens_electric_solutions/changelog.md for the raw report
-# Or visit the dashboard (if running)
+# Or check the v1 and v2 folders for JSON data
 ```
 
 ## 🧠 Engineering Principles
