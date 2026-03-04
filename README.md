@@ -55,7 +55,7 @@ Check the versioned outputs directly in the file system:
 - [x] `/outputs/accounts/`: v1, v2, and changelogs.
 - [x] `/scripts`: All extraction and merging logic.
 - [x] `README.md`: Project overview and setup.
-- [/] **Loom Video**: [Insert Link Here Post-Recording]
+- [x] **Loom Video**: [Watch Demo](https://www.loom.com/share/4b52276bc2b246a3a2c179841483b615)
 
 ### Recorded Demo (3-5 Minutes)
 The video covers:
